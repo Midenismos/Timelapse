@@ -1,1 +1,0 @@
-Pourqdf tj jryu ry
