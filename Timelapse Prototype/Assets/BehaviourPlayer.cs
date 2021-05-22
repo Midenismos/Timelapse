@@ -76,6 +76,7 @@ public class BehaviourPlayer : MonoBehaviour
         {
             pickup.GetComponent<TimeChanger>().changeTime();
             Destroy(pickup);
+            pickup = null;
         }
     }
 
@@ -84,7 +85,10 @@ public class BehaviourPlayer : MonoBehaviour
         Move();
 
         //Colle l'item porté par le joueur près de lui
-        pickup.transform.parent = gameObject.transform;
+        if (pickup != null)
+        {
+            pickup.transform.parent = gameObject.transform;
+        }
     }
 
     //Déplace le joueur
@@ -99,11 +103,13 @@ public class BehaviourPlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Pickup")
         {
-            if (Input.GetKey("a"))
+            if (pickup == null)
             {
-                pickup = other.gameObject;
+                if (Input.GetKey("a"))
+                {
+                    pickup = other.gameObject;
+                }
             }
-            Debug.Log("Hey");
         }
     }
 }
