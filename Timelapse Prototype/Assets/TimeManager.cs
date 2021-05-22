@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    [SerializeField] private RewindManager rewindManager = null;
+    
     //Ne rien changer là dedans
 
     public float multiplier;
@@ -20,11 +22,18 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         multiplier = baseMultiplier;
+        rewindManager.OnRewindStopped += RewindStopped;
     }
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
+        //Keyboard controlls for testing
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //StartRewind();
+        }
+
         //Décrémente le timer
         if (timer >= 0)
         {
@@ -54,15 +63,23 @@ void Update()
                 multiplier = Mathf.Lerp(newMultiplier, baseMultiplier, timerLerp);
             }
         }
-
     }
 
     //Commence le changement de temps (appellé par un TimeChanger)
-    public void StartTimeChange(float NewMultiplier)
+    public void StartTimeChange(float NewMultiplier, float timeChangeDuration)
     {
-        timerLerp = timerLerpMin;
-        newMultiplier = NewMultiplier;
-        goBackTimeChange = false;
+        if(newMultiplier >= 0)
+        {
+            timerLerp = timerLerpMin;
+            newMultiplier = NewMultiplier;
+            goBackTimeChange = false;
+            timer = timeChangeDuration;
+        } else
+        {
+            Debug.Log("started Rewind");
+            StartRewind(-NewMultiplier, timeChangeDuration);
+        }
+        
     }
 
     //Termine le changement de temps
@@ -70,5 +87,18 @@ void Update()
     {
         timerLerp = timerLerpMin;
         goBackTimeChange = true;
+    }
+
+    public void StartRewind(float speed, float duration)
+    {
+        multiplier = 0;
+        timerLerp = timerLerpMax + 1;
+        rewindManager.StartRewind(speed, duration);
+    }
+
+    private void RewindStopped()
+    {
+        multiplier = 1;
+        timerLerp = timerLerpMax + 1;
     }
 }

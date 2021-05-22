@@ -31,8 +31,8 @@ public class TimeChanger : MonoBehaviour
     public void changeTime()
     {
         //Initialise le timer du TimeManager
-        TimeManager.GetComponent<TimeManager>().timer = Duration;
+        //OLD, combined that in startTimechange TimeManager.GetComponent<TimeManager>().timer = Duration;
         //Change le multiplier de vitesse
-        TimeManager.GetComponent<TimeManager>().StartTimeChange(NewMultiplier);
+        TimeManager.GetComponent<TimeManager>().StartTimeChange(NewMultiplier, Duration);
     }
 }

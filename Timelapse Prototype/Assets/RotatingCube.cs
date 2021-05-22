@@ -26,6 +26,12 @@ public class RotatingCube : MonoBehaviour
         multiplier = TimeManager.GetComponent<TimeManager>().multiplier;
 
         //Tourne l'item en fonction du multiplier
-        gameObject.transform.Rotate(0, BaseSpeed * multiplier, 0);
+        //OLD CODE : gameObject.transform.Rotate(0, BaseSpeed * multiplier, 0);
+        Rotate(multiplier * Time.deltaTime);
+    }
+
+    public void Rotate(float deltaGameTime)
+    {
+        gameObject.transform.Rotate(0, BaseSpeed * deltaGameTime, 0);
     }
 }
