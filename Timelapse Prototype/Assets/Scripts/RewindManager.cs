@@ -77,7 +77,7 @@ public class RewindManager : MonoBehaviour
         isRewinding = true;
     }
 
-    public void EndRewind()
+    public float EndRewind()
     {
         for (int i = 0; i < rewindables.Length; i++)
         {
@@ -87,5 +87,17 @@ public class RewindManager : MonoBehaviour
         isRewinding = false;
 
         OnRewindStopped?.Invoke();
+
+        return rewindDuration - rewindTimeCounter;
+    }
+
+    public void AddDuration(float addedDuration)
+    {
+        rewindDuration += addedDuration;
+    }
+
+    public void ChangeSpeed(float newSpeed)
+    {
+        rewindSpeed = newSpeed;
     }
 }
