@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class TimeChanger : MonoBehaviour
 {
-    //Changer ces variables pour équilibrage
-    [SerializeField]
-    private float Duration = 0.0f;
+    [SerializeField] TimeChange timeChange;
 
-    [SerializeField]
-    private float NewMultiplier = 0.0f;
+    ////Changer ces variables pour équilibrage
+    //[SerializeField]
+    //private float Duration = 0.0f;
+
+    //[SerializeField]
+    //private float NewMultiplier = 0.0f;
 
     //Ne pas changer ces variables
-    private GameObject TimeManager;
+    private TimeManager TimeManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //Connecte l'objet au TimeManager
-        TimeManager = GameObject.Find("TimeManager");
+        TimeManager = FindObjectOfType<TimeManager>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,6 @@ public class TimeChanger : MonoBehaviour
         //Initialise le timer du TimeManager
         //OLD, combined that in startTimechange TimeManager.GetComponent<TimeManager>().timer = Duration;
         //Change le multiplier de vitesse
-        TimeManager.GetComponent<TimeManager>().StartTimeChange(NewMultiplier, Duration);
+        TimeManager.StartTimeChange(timeChange);
     }
 }
