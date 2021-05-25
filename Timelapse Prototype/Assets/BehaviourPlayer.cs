@@ -4,31 +4,24 @@ using UnityEngine;
 
 public class BehaviourPlayer : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Camera cam;
-    
-    private float speed = 100;
-    private float VerticalMove;
-    private float HorizontalMove;
-    private float velocityX;
-    private float velocityY =0;
-    private float velocityZ;
 
-    private Vector3 moveDirection;
-
-    private float jumpPower = 5f;
-    private float gravity = 9.81f ;
-
-    private float rotationY;
-    private float rotationX;
-    private float minimumX = -60f;
-    private float maximumX = 60f;
-
-
-    private RaycastHit hit;
 
     public GameObject pickup = null;
 
+
+    public CharacterController controller;
+
+    public float speed = 12f;
+    public float gravity = -9.81f;
+    public float jumpHeight = 3f;
+
+    public Vector3 velocity;
+
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
+    bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -39,51 +32,56 @@ public class BehaviourPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Gère la rotation du joueur avec la souris
-        rotationY += Input.GetAxis("Mouse X");
-        rotationX += Input.GetAxis("Mouse Y");
+        // Nouvelle façon de déplacer le joueur à partir de la vidéo de Brackey
+        // Le code de la rotation du joueur par rapport à la souris a été déplacé vers MouseLook
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
-
-        cam.transform.localEulerAngles = new Vector3(-rotationX,0, 0);
-        transform.localEulerAngles = new Vector3(0, rotationY, 0);
-
-        // Gère les inputs de déplacements du joueur
-        HorizontalMove = Input.GetAxis("Horizontal");
-        VerticalMove = Input.GetAxis("Vertical");
-
-        velocityX = HorizontalMove;
-        velocityZ = VerticalMove;
-
-        //Gère la gravité et le saut
-        if (Input.GetKey(KeyCode.Space) == true && Physics.Raycast(transform.position, new Vector3(0, -1), out hit, 1f) == true)
+        if (isGrounded && velocity.y < 0)
         {
-            velocityY = Mathf.Sqrt(jumpPower * 2.0f * gravity);
-        }
-        else if (Physics.Raycast(transform.position, new Vector3(0, -1), out hit, 1f) == true)
-        {
-            velocityY = 0;
-        }
-        else
-        {
-            velocityY -= gravity * Time.fixedDeltaTime;
+            velocity.y = -2f;
         }
 
-        moveDirection = (transform.right * velocityX + transform.forward * velocityZ).normalized;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        controller.Move(move * speed * Time.deltaTime);
+
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetButtonDown("Jump")&& isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
 
         // Utilise l'item porté
         if (Input.GetKeyDown("e") == true)
         {
-            pickup.GetComponent<TimeChanger>().changeTime();
-            Destroy(pickup);
-            pickup = null;
+            if (pickup != null)
+            {
+                pickup.GetComponent<TimeChanger>().changeTime();
+                Destroy(pickup);
+                pickup = null;
+            }
+        }
+
+        //Lache l'item
+        if (pickup != null)
+        {
+            if (Input.GetKeyDown("r"))
+            {
+                pickup.transform.parent = null;
+                pickup = null;
+            }
         }
     }
 
     void FixedUpdate()
     {
-        Move();
-
         //Colle l'item porté par le joueur près de lui
         if (pickup != null)
         {
@@ -91,21 +89,15 @@ public class BehaviourPlayer : MonoBehaviour
         }
     }
 
-    //Déplace le joueur
-    public void Move()
-    {
-        rb.velocity = moveDirection * speed * Time.deltaTime;
-        rb.velocity += new Vector3 (rb.velocity.x, velocityY, rb.velocity.z);
-    }
 
     //Permet au joueur de prendre des items
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Pickup")
         {
             if (pickup == null)
             {
-                if (Input.GetKey("a"))
+                if (Input.GetKeyDown("a"))
                 {
                     pickup = other.gameObject;
                 }
