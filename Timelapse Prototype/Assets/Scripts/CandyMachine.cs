@@ -24,7 +24,7 @@ public class CandyMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.GetComponent<TextMeshPro>().text = type + " " + duration;
+        text.GetComponent<TextMeshPro>().text = type + " " + duration+"s";
 
     }
 
@@ -37,9 +37,17 @@ public class CandyMachine : MonoBehaviour
                 GameObject prefab = Instantiate(timeFood);
                 prefab.transform.position = pos;
                 prefab.GetComponent<TimeChanger>().timeChange.duration = duration;
-                prefab.GetComponentInChildren<TextMeshPro>().text = type + " " + duration;
+                prefab.GetComponentInChildren<TextMeshPro>().text = type + " " + duration+"s";
                 particle.Play();
 
+            }
+            if (Input.GetKeyDown("y"))
+            {
+                duration += 1;
+            }
+            if (Input.GetKeyDown("t"))
+            {
+                duration -= 1;
             }
         }
     }

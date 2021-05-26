@@ -1002,6 +1002,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StopTimeMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 6407532787042052685, guid: 437a3ece7eac306459340e5aa365bef3,
+        type: 3}
+      propertyPath: duration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6412419013927754629, guid: 437a3ece7eac306459340e5aa365bef3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1630,14 +1635,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Espace pour Sauter
-
-    A pour prendre un objet
-
-    E pour l''utiliser
-
-    R
-    pour lacher un objet'
+  m_Text: "Espace pour Sauter\nA pour prendre un objet\nE pour l'utiliser\nR pour
+    lacher un objet\nT et Y pour changer la dur\xE9e sur les machines"
 --- !u!222 &1237818990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1830,7 +1829,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14466
+  m_Name: pb_Mesh14896
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

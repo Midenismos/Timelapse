@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5204889075187885722}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6412419013927754629}
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 5, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5573733302447069615
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -269,7 +269,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5402498
+  m_Radius: 1.5
   m_Center: {x: 0.10167702, y: 1.5405011, z: 0.06827715}
 --- !u!114 &6407532787042052685
 MonoBehaviour:
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeFood: {fileID: 8385329324502464433, guid: c958f80d85368ac4ead45db59a6701e2,
     type: 3}
-  duration: 15
+  duration: 5
   spawnPosition: {fileID: 6407532786945762701}
   particle: {fileID: 6407532787935944110}
   text: {fileID: 5204889075187885722}
