@@ -265,8 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeChange:
     type: 2
-    duration: 5
-    speed: 0.5
+    duration: 20
+    speed: 0.25
 --- !u!33 &4720520864818907216
 MeshFilter:
   m_ObjectHideFlags: 0

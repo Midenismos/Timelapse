@@ -1701,7 +1701,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1829,7 +1829,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14896
+  m_Name: pb_Mesh26446
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2807,6 +2807,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AccelerateTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 460909118457106463, guid: 5c443e9c1c21c5946a5aee6586576772,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 465215496990927335, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}

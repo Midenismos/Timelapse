@@ -378,5 +378,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeChange:
     type: 1
-    duration: 5
+    duration: 20
     speed: 0

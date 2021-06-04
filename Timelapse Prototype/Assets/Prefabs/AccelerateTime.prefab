@@ -109,8 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeChange:
     type: 3
-    duration: 5
-    speed: 2
+    duration: 30
+    speed: 2.5
 --- !u!1 &6105957642143410444
 GameObject:
   m_ObjectHideFlags: 0
