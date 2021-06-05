@@ -10,24 +10,23 @@ public class RotatingCube : MonoBehaviour
 
     //Ne pas toucher à ces variables
     public float multiplier = 1f;
-    private GameObject TimeManager;
+    private TimeManager timeManager;
 
     // Start is called before the first frame update
     void Start()
     {
         //Connecte l'objet au TimeManager
-        TimeManager = GameObject.Find("TimeManager");
+        timeManager = FindObjectOfType<TimeManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Change la vitesse du gameObject
-        multiplier = TimeManager.GetComponent<TimeManager>().multiplier;
 
         //Tourne l'item en fonction du multiplier
         //OLD CODE : gameObject.transform.Rotate(0, BaseSpeed * multiplier, 0);
-        Rotate(multiplier * Time.deltaTime);
+        Rotate(Time.deltaTime * timeManager.multiplier);
     }
 
     public void Rotate(float deltaGameTime)
