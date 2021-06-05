@@ -63,9 +63,12 @@ public class BehaviourPlayer : MonoBehaviour
         {
             if (pickup != null)
             {
-                pickup.GetComponent<TimeChanger>().changeTime();
-                Destroy(pickup);
-                pickup = null;
+                if (pickup.GetComponent<TimeChanger>() != null)
+                {
+                    pickup.GetComponent<TimeChanger>().changeTime();
+                    Destroy(pickup);
+                    pickup = null;
+                }
             }
         }
 

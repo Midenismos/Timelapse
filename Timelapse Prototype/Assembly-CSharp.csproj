@@ -65,11 +65,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BehaviourPlayer.cs" />
+    <Compile Include="Assets\Scripts\BrokeCard.cs" />
     <Compile Include="Assets\Scripts\CandyMachine.cs" />
+    <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\FlickeringLight.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\RewindManager.cs" />
     <Compile Include="Assets\Scripts\Rewindable.cs" />
+    <Compile Include="Assets\Scripts\RewindableCard.cs" />
     <Compile Include="Assets\Scripts\RewindableLight.cs" />
     <Compile Include="Assets\Scripts\RewindableRotatingCube.cs" />
     <Compile Include="Assets\Scripts\RotatingCube.cs" />
