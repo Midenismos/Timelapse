@@ -35,6 +35,7 @@ public class Digicode : MonoBehaviour
     private int previousCount = 0;
 
     public string executedFunction;
+    public string executedRewindedFunction;
     public GameObject executedGameObject;
 
 
@@ -47,6 +48,13 @@ public class Digicode : MonoBehaviour
         TimeManager = GameObject.Find("TimeManager");
 
         timerBlink = timerBlinkMax;
+        foreach (GameObject button in buttons)
+        {
+            button.GetComponent<Button>().buttonActivatedMaterial = activatedMaterial;
+            button.GetComponent<Button>().buttonDeactivatedMaterial = deactivatedMaterial;
+
+        }
+
     }
 
     // Update is called once per frame
@@ -67,16 +75,14 @@ public class Digicode : MonoBehaviour
                     //Valide le bouton et change son apparence s'il est appuyé dans le bon ordre
                     if (button.GetComponent<DigicodeButton>().ButtonOrderNumber == expectedNumber)
                     {
-                        button.GetComponent<MeshRenderer>().material = activatedMaterial;
-                        currentNumber += 1;
                         button.GetComponent<DigicodeButton>().CheckedButton = true;
+                        currentNumber += 1;
                     }
                     //Reset le digicode si le joueur n'appuye pas de le bon ordre.
                     else
                     {
                         Fail();
                     }
-                    button.GetComponent<Button>().clicked = false;
                 }
             }
         }
@@ -124,6 +130,7 @@ public class Digicode : MonoBehaviour
         {
             executedGameObject.SendMessage(executedFunction);
         }
+
     }
 
     private void Fail()
@@ -131,10 +138,19 @@ public class Digicode : MonoBehaviour
         //Reset le digicode en cas d'échec
         foreach (GameObject button in buttons)
         {
-            button.GetComponent<MeshRenderer>().material = deactivatedMaterial;
             button.GetComponent<DigicodeButton>().CheckedButton = false;
+            button.GetComponent<Button>().clicked = false;
         }
         currentNumber = 0;
+    }
 
+    public void rewindNumber()
+    {
+        currentNumber -= 1;
+        buttons[currentNumber].GetComponent<DigicodeButton>().CheckedButton = false;
+        if (currentNumber == maxNumber - 1)
+        {
+            executedGameObject.SendMessage(executedRewindedFunction);
+        }
     }
 }

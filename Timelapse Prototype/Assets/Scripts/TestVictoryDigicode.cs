@@ -20,4 +20,9 @@ public class TestVictoryDigicode : MonoBehaviour
     {
         transform.GetChild(0).gameObject.SetActive(true);
     }
+
+    public void DeActivate()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
 }

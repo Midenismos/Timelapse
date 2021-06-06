@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\RewindManager.cs" />
     <Compile Include="Assets\Scripts\Rewindable.cs" />
+    <Compile Include="Assets\Scripts\RewindableButton.cs" />
     <Compile Include="Assets\Scripts\RewindableCard.cs" />
     <Compile Include="Assets\Scripts\RewindableDigicode.cs" />
     <Compile Include="Assets\Scripts\RewindableLight.cs" />

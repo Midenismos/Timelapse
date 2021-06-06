@@ -23,10 +23,12 @@ public class BehaviourPlayer : MonoBehaviour
 
     bool isGrounded;
 
+    private GameObject TimeManager;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        TimeManager = GameObject.Find("TimeManager");
     }
 
     // Update is called once per frame
@@ -78,10 +80,14 @@ public class BehaviourPlayer : MonoBehaviour
         {
             if (hit.collider.tag == "Button" )
             {
-                if (Input.GetKeyDown("e") == true)
+                if(TimeManager.GetComponent<TimeManager>().multiplier !=0)
                 {
-                    hit.collider.GetComponent<Button>().clicked = true;
+                    if (Input.GetKeyDown("e") == true)
+                    {
+                        hit.collider.GetComponent<Button>().clicked = true;
+                    }
                 }
+
             }
 
         }

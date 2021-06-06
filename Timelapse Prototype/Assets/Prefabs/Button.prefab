@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 1099955511182861921}
   - component: {fileID: 1099955511182861924}
   - component: {fileID: 1099955511182861925}
+  - component: {fileID: 5996467989329939201}
   m_Layer: 0
-  m_Name: Button 1
+  m_Name: Button
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,6 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clicked: 0
+  timerSinceClicked: 0
+  multiplier: 1
+  buttonActivatedMaterial: {fileID: 0}
+  buttonDeactivatedMaterial: {fileID: 0}
 --- !u!114 &1099955511182861925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +128,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonOrderNumber: 1
   CheckedButton: 0
+--- !u!114 &5996467989329939201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099955511182861935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8f120b07c96a14a93a39899167d793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1099955511182861924}
 --- !u!1 &2978089942132361164
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +168,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2978089942132361164}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.76}
+  m_LocalPosition: {x: 0, y: 0, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1099955511182861920}
@@ -159,7 +177,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.51, y: -0.741}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 1, y: 5}
   m_Pivot: {x: 0, y: 0}
 --- !u!23 &6161099486067800781
 MeshRenderer:
