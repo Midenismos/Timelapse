@@ -7,7 +7,7 @@ public class BehaviourPlayer : MonoBehaviour
 
 
     public GameObject pickup = null;
-
+    public new Camera camera = null;
 
     public CharacterController controller;
 
@@ -71,6 +71,21 @@ public class BehaviourPlayer : MonoBehaviour
                 }
             }
         }
+
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.collider.tag == "Button" )
+            {
+                if (Input.GetKeyDown("e") == true)
+                {
+                    hit.collider.GetComponent<Button>().clicked = true;
+                }
+            }
+
+        }
+
 
         //Lache l'item
         if (pickup != null)

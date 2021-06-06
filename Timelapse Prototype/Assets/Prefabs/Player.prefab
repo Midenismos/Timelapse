@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickup: {fileID: 0}
+  camera: {fileID: 3929148789461630442}
   controller: {fileID: 6374038495261445849}
   speed: 6
   gravity: -19.62
