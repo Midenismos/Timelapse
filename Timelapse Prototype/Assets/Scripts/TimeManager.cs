@@ -60,13 +60,6 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTolerance += Time.deltaTime;
-
-        if(currentTolerance >= loopDuration)
-        {
-            RestartLoop();
-            return;
-        }
 
         if (!rewindManager.isRewinding)
         {
@@ -89,8 +82,10 @@ public class TimeManager : MonoBehaviour
     }
 
     //Commence le changement de temps (appellé par un TimeChanger)
-    public void StartTimeChange(TimeChange timeChange)
+    public void StartTimeChange(TimeChange timeChange, float toleranceCost = 0)
     {
+        PayToleranceCost(toleranceCost);
+
         if (!hasTimeChange)
         {
             if (timeChange.type == TimeChangeType.REWIND)
@@ -281,5 +276,15 @@ public class TimeManager : MonoBehaviour
     private void RestartLoop()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void PayToleranceCost (float toleranceCost)
+    {
+        currentTolerance += toleranceCost * loopDuration;
+
+        if (currentTolerance >= loopDuration)
+        {
+            RestartLoop();
+        }
     }
 }
