@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 8362643034727116007}
   - component: {fileID: 8384116101861917341}
   - component: {fileID: 8384116101861917340}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StopTime
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0.37917808, z: -0.00000002607703}
 --- !u!114 &8384116101861917340
 MonoBehaviour:
@@ -378,5 +378,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeChange:
     type: 1
-    duration: 5
+    duration: 20
     speed: 0
+  toleranceCost: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 447991197171915677}
   - component: {fileID: 460909118457106462}
   - component: {fileID: 460909118457106463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AccelerateTime
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: -0.0073118135, y: 0.19639865, z: -0.018381134}
 --- !u!114 &460909118457106463
 MonoBehaviour:
@@ -109,8 +109,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeChange:
     type: 3
-    duration: 5
-    speed: 2
+    duration: 30
+    speed: 2.5
+  toleranceCost: 0
 --- !u!1 &6105957642143410444
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class BehaviourPlayer : MonoBehaviour
 
 
     public GameObject pickup = null;
-
+    public new Camera camera = null;
 
     public CharacterController controller;
 
@@ -21,12 +21,17 @@ public class BehaviourPlayer : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    [SerializeField] private float pickupDistance = 3;
+    [SerializeField] private LayerMask pickupMask;
+
     bool isGrounded;
+
+    private GameObject TimeManager;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        TimeManager = GameObject.Find("TimeManager");
     }
 
     // Update is called once per frame
@@ -46,11 +51,11 @@ public class BehaviourPlayer : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.unscaledDeltaTime);
+        controller.Move(move * speed * Time.deltaTime);
 
-        velocity.y += gravity * Time.unscaledDeltaTime;
+        velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.unscaledDeltaTime);
+        controller.Move(velocity * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump")&& isGrounded)
         {
@@ -63,11 +68,41 @@ public class BehaviourPlayer : MonoBehaviour
         {
             if (pickup != null)
             {
-                pickup.GetComponent<TimeChanger>().ChangeTime();
-                Destroy(pickup);
-                pickup = null;
+                if (pickup.GetComponent<TimeChanger>() != null)
+                {
+                    pickup.GetComponent<TimeChanger>().ChangeTime();
+                    Destroy(pickup);
+                    pickup = null;
+                }
             }
         }
+
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.collider.tag == "Button" )
+            {
+                if(TimeManager.GetComponent<TimeManager>().multiplier !=0)
+                {
+                    if (Input.GetKeyDown("e") == true)
+                    {
+                        hit.collider.GetComponent<Button>().clicked = true;
+                    }
+                }
+
+            }
+
+        }
+
+        if(pickup == null)
+        {
+            if(Input.GetKeyDown("a"))
+            {
+                TryPickupItem();
+            }
+        }
+
 
         //Lache l'item
         if (pickup != null)
@@ -91,17 +126,27 @@ public class BehaviourPlayer : MonoBehaviour
 
 
     //Permet au joueur de prendre des items
-    public void OnTriggerStay(Collider other)
+    //public void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Pickup")
+    //    {
+    //        if (pickup == null)
+    //        {
+    //            if (Input.GetKeyDown("a"))
+    //            {
+    //                pickup = other.gameObject;
+    //            }
+    //        }
+    //    }
+    //}
+
+    private void TryPickupItem()
     {
-        if (other.gameObject.tag == "Pickup")
+        RaycastHit hit;
+
+        if (Physics.Raycast(new Ray(camera.transform.position, camera.transform.forward), out hit, pickupDistance, pickupMask))
         {
-            if (pickup == null)
-            {
-                if (Input.GetKeyDown("a"))
-                {
-                    pickup = other.gameObject;
-                }
-            }
-        }
+            pickup = hit.collider.gameObject;
+        } 
     }
 }
