@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum TimeChangeType
 {
@@ -21,13 +22,22 @@ public struct TimeChange
 
 public class TimeManager : MonoBehaviour
 {
+    [Header("Loop Settings")]
+    [SerializeField] private float loopDuration = 10;
+
+    [Header("Timescale Settings")]
     [SerializeField] private float startingMultiplier = 1;
     [SerializeField] private float timeLerpDuration = 1;
+    [SerializeField] private int maximumActiveTimeChangers = 2;
 
+    [Header("References")]
     [SerializeField] private RewindManager rewindManager = null;
     
-    public float multiplier;
+    public float multiplier = 1;
     public float timer = 0f;
+
+    public float currentLoopTime = 0;
+    public float currentTolerance = 0;
 
     private bool hasTimeChange = false;
     private TimeChange currentTimeChange;
@@ -36,21 +46,33 @@ public class TimeManager : MonoBehaviour
 
     private bool mustResumeCurrentTimeChange = false;
 
+    private int currentlyActiveTimechangers = 0;
+
     private Coroutine TimeLerpCoroutine = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        multiplier = startingMultiplier;
+        //multiplier = startingMultiplier;
         rewindManager.OnRewindStopped += RewindStopped;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!rewindManager.isRewinding)
+        {
+            currentLoopTime += Time.deltaTime;
+
+            if(currentLoopTime >= loopDuration)
+            {
+                RestartLoop();
+            }
+        }
         if(hasStandartTimeChange)
         {
-            timer -= Time.deltaTime;
+            timer -= Time.unscaledDeltaTime;
 
             if(timer <= 0)
             {
@@ -60,8 +82,10 @@ public class TimeManager : MonoBehaviour
     }
 
     //Commence le changement de temps (appellé par un TimeChanger)
-    public void StartTimeChange(TimeChange timeChange)
+    public void StartTimeChange(TimeChange timeChange, float toleranceCost = 0)
     {
+        PayToleranceCost(toleranceCost);
+
         if (!hasTimeChange)
         {
             if (timeChange.type == TimeChangeType.REWIND)
@@ -147,6 +171,8 @@ public class TimeManager : MonoBehaviour
                 }
             }
         }
+
+        IncrementCurrentlyActiveTimeChangers();
     }
 
     private void StartStandartTimeChange(float speed, float duration)
@@ -173,8 +199,11 @@ public class TimeManager : MonoBehaviour
             }
 
             mustResumeCurrentTimeChange = false;
+            currentlyActiveTimechangers--;
             return;
         }
+
+        currentlyActiveTimechangers = 0;
 
         if(executeTimeLerp)
         {
@@ -192,6 +221,7 @@ public class TimeManager : MonoBehaviour
     private void RewindStopped()
     {
         multiplier = 1;
+
         hasTimeChange = false;
     }
 
@@ -210,11 +240,13 @@ public class TimeManager : MonoBehaviour
 
         while (timeCounter < duration)
         {
-            timeCounter += Time.deltaTime;
-            multiplier = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
+            timeCounter += Time.unscaledDeltaTime;
+            //multiplier = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
+            Time.timeScale = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
             yield return null;
         }
-        multiplier = newMultiplier;
+        //multiplier = newMultiplier;
+        Time.timeScale = newMultiplier;
     }
 
     private void PauseCurrentTimeChange()
@@ -229,5 +261,30 @@ public class TimeManager : MonoBehaviour
         }
         mustResumeCurrentTimeChange = true;
 
+    }
+
+    private void IncrementCurrentlyActiveTimeChangers()
+    {
+        currentlyActiveTimechangers++;
+
+        if(currentlyActiveTimechangers > maximumActiveTimeChangers)
+        {
+            RestartLoop();
+        }
+    }
+
+    private void RestartLoop()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void PayToleranceCost (float toleranceCost)
+    {
+        currentTolerance += toleranceCost * loopDuration;
+
+        if (currentTolerance >= loopDuration)
+        {
+            RestartLoop();
+        }
     }
 }

@@ -11,12 +11,16 @@ public class RewindManager : MonoBehaviour
     private float rewindDuration = 0;
     private float rewindSpeed = 0;
     private float rewindTimeCounter = 0;
-    private bool isRewinding = false;
+    public bool isRewinding = false;
+
+    private TimeManager timeManager = null;
 
     // Start is called before the first frame update
     void Start()
     {
         rewindables = FindObjectsOfType<Rewindable>();
+
+        timeManager = FindObjectOfType<TimeManager>();
     }
 
     // Update is called once per frame
@@ -32,11 +36,13 @@ public class RewindManager : MonoBehaviour
             {
                 deltaGameTime = rewindDuration - lastCounter;
                 rewindTimeCounter = rewindDuration;
+                timeManager.currentLoopTime -= deltaGameTime;
                 RewindRewindables(deltaGameTime);
                 EndRewind();
             }
             else
             {
+                timeManager.currentLoopTime -= deltaGameTime;
                 RewindRewindables(deltaGameTime);
             }
         }

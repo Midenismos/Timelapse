@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickup: {fileID: 0}
+  camera: {fileID: 3929148789461630442}
   controller: {fileID: 6374038495261445849}
   speed: 6
   gravity: -19.62
@@ -283,3 +284,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  pickupDistance: 1.5
+  pickupMask:
+    serializedVersion: 2
+    m_Bits: 512

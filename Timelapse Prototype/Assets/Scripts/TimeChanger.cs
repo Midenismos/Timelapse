@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeChanger : MonoBehaviour
 {
     [SerializeField] public TimeChange timeChange;
+    [SerializeField] private float toleranceCost = 0;
 
     ////Changer ces variables pour équilibrage
     //[SerializeField]
@@ -14,14 +15,14 @@ public class TimeChanger : MonoBehaviour
     //private float NewMultiplier = 0.0f;
 
     //Ne pas changer ces variables
-    private TimeManager TimeManager;
+    private TimeManager timeManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //Connecte l'objet au TimeManager
-        TimeManager = FindObjectOfType<TimeManager>();
+        timeManager = FindObjectOfType<TimeManager>();
     }
 
     // Update is called once per frame
@@ -30,11 +31,11 @@ public class TimeChanger : MonoBehaviour
 
     }
 
-    public void changeTime()
+    public void ChangeTime()
     {
         //Initialise le timer du TimeManager
         //OLD, combined that in startTimechange TimeManager.GetComponent<TimeManager>().timer = Duration;
         //Change le multiplier de vitesse
-        TimeManager.StartTimeChange(timeChange);
+        timeManager.StartTimeChange(timeChange, toleranceCost);
     }
 }
