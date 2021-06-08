@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class BehaviourPlayer : MonoBehaviour
 {
-
-
     public GameObject pickup = null;
     public new Camera camera = null;
 
     public CharacterController controller;
 
+    [SerializeField] private PlayerController playerController = null;
+
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
+
+    [SerializeField] private float jumpImpulsion = 5;
 
     public Vector3 velocity;
 
@@ -49,17 +51,19 @@ public class BehaviourPlayer : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
-        controller.Move(move * speed * Time.deltaTime);
+        
+        playerController.Move(move * speed / Time.timeScale);
 
-        velocity.y += gravity * Time.deltaTime;
+        //velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        //controller.Move(velocity * Time.deltaTime);
+        //playerController.Move(velocity * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump")&& isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            playerController.Jump(jumpImpulsion);
         }
 
 

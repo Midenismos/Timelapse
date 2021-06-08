@@ -242,11 +242,13 @@ public class TimeManager : MonoBehaviour
         {
             timeCounter += Time.unscaledDeltaTime;
             //multiplier = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
-            Time.timeScale = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
+            //Time.timeScale = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
+            ChangeTimeScale(Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration));
             yield return null;
         }
         //multiplier = newMultiplier;
-        Time.timeScale = newMultiplier;
+        //Time.timeScale = newMultiplier;
+        ChangeTimeScale(newMultiplier);
     }
 
     private void PauseCurrentTimeChange()
@@ -286,5 +288,11 @@ public class TimeManager : MonoBehaviour
         {
             RestartLoop();
         }
+    }
+
+    private void ChangeTimeScale (float newTimeScale)
+    {
+        Time.timeScale = newTimeScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale; 
     }
 }
