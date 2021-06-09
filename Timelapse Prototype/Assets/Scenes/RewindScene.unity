@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -627,7 +627,12 @@ PrefabInstance:
     - target: {fileID: 460909118457106463, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
       propertyPath: timeChange.duration
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 460909118457106463, guid: 5c443e9c1c21c5946a5aee6586576772,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 465215496990927335, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
@@ -697,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 8164435044770373249, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
       propertyPath: m_text
-      value: Accelerate 10s
+      value: Accelerate 15s
       objectReference: {fileID: 0}
     - target: {fileID: 8164435044770373249, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
@@ -812,7 +817,7 @@ PrefabInstance:
     - target: {fileID: 1046058395295918619, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
       propertyPath: m_text
-      value: Rewind 15s
+      value: Rewind 30s
       objectReference: {fileID: 0}
     - target: {fileID: 1046058395295918619, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
@@ -882,7 +887,12 @@ PrefabInstance:
     - target: {fileID: 8384116101861917340, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
       propertyPath: timeChange.duration
-      value: 15
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384116101861917340, guid: 28f2386bcc0bcdb468e977393d1f25e0,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8385329324502464433, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
@@ -987,6 +997,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowTime (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241974922735911562, guid: e2b7fffda3599974bb4602bd105839de,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fffda3599974bb4602bd105839de, type: 3}
@@ -1509,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 1046058395295918619, guid: c958f80d85368ac4ead45db59a6701e2,
         type: 3}
       propertyPath: m_text
-      value: Stop 15s
+      value: Stop 20s
       objectReference: {fileID: 0}
     - target: {fileID: 6675009605861594551, guid: c958f80d85368ac4ead45db59a6701e2,
         type: 3}
@@ -1574,7 +1589,7 @@ PrefabInstance:
     - target: {fileID: 8384116101861917340, guid: c958f80d85368ac4ead45db59a6701e2,
         type: 3}
       propertyPath: timeChange.duration
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8385329324502464433, guid: c958f80d85368ac4ead45db59a6701e2,
         type: 3}
@@ -1739,7 +1754,12 @@ PrefabInstance:
     - target: {fileID: 460909118457106463, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
       propertyPath: timeChange.duration
-      value: 15
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 460909118457106463, guid: 5c443e9c1c21c5946a5aee6586576772,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 465215496990927335, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
@@ -1809,7 +1829,7 @@ PrefabInstance:
     - target: {fileID: 8164435044770373249, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
       propertyPath: m_text
-      value: Accelerate 15s
+      value: Accelerate 30s
       objectReference: {fileID: 0}
     - target: {fileID: 8164435044770373249, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
@@ -2016,7 +2036,7 @@ PrefabInstance:
     - target: {fileID: 140070191313678431, guid: e2b7fffda3599974bb4602bd105839de,
         type: 3}
       propertyPath: m_text
-      value: Slow 15s
+      value: Slow 20s
       objectReference: {fileID: 0}
     - target: {fileID: 4183068365129349851, guid: e2b7fffda3599974bb4602bd105839de,
         type: 3}
@@ -2086,7 +2106,12 @@ PrefabInstance:
     - target: {fileID: 5241974922735911562, guid: e2b7fffda3599974bb4602bd105839de,
         type: 3}
       propertyPath: timeChange.duration
-      value: 15
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241974922735911562, guid: e2b7fffda3599974bb4602bd105839de,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fffda3599974bb4602bd105839de, type: 3}
@@ -2421,7 +2446,7 @@ PrefabInstance:
     - target: {fileID: 1046058395295918619, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
       propertyPath: m_text
-      value: "Rewind 5s\n "
+      value: "Rewind 10s\n "
       objectReference: {fileID: 0}
     - target: {fileID: 6675009605861594551, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
@@ -2483,6 +2508,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8384116101861917340, guid: 28f2386bcc0bcdb468e977393d1f25e0,
+        type: 3}
+      propertyPath: timeChange.duration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384116101861917340, guid: 28f2386bcc0bcdb468e977393d1f25e0,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8385329324502464433, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
       propertyPath: m_Name
@@ -2525,7 +2560,7 @@ PrefabInstance:
     - target: {fileID: 1046058395295918619, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
       propertyPath: m_text
-      value: Rewind 10s
+      value: Rewind 20s
       objectReference: {fileID: 0}
     - target: {fileID: 1046058395295918619, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
@@ -2595,7 +2630,12 @@ PrefabInstance:
     - target: {fileID: 8384116101861917340, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
       propertyPath: timeChange.duration
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384116101861917340, guid: 28f2386bcc0bcdb468e977393d1f25e0,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8385329324502464433, guid: 28f2386bcc0bcdb468e977393d1f25e0,
         type: 3}
@@ -2807,6 +2847,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AccelerateTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 460909118457106463, guid: 5c443e9c1c21c5946a5aee6586576772,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 465215496990927335, guid: 5c443e9c1c21c5946a5aee6586576772,
         type: 3}
@@ -3154,6 +3199,11 @@ PrefabInstance:
         type: 3}
       propertyPath: timeChange.duration
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241974922735911562, guid: e2b7fffda3599974bb4602bd105839de,
+        type: 3}
+      propertyPath: timeChange.speed
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fffda3599974bb4602bd105839de, type: 3}
