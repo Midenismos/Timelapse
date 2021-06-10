@@ -4,18 +4,41 @@ using UnityEngine;
 
 public class Train : MonoBehaviour
 {
+    public GameObject[] Destination;
 
-    public GameObject Destination;
+    public int currentDestination = 0;
+    public int previousDestination = 0;
+
+
+    public float multiplier = 1f;
+
+    private GameObject TimeManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Connecte l'objet au TimeManager
+        TimeManager = GameObject.Find("TimeManager");
+        previousDestination = Destination.Length-1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Destination.transform.position, 10 * Time.deltaTime);
+        multiplier = TimeManager.GetComponent<TimeManager>().multiplier;
+
+
+
+        if (transform.position == Destination[currentDestination].transform.position)
+        {
+            previousDestination = currentDestination;
+            currentDestination += 1;
+            if (currentDestination == Destination.Length)
+            {
+                currentDestination = 0;
+            }
+        }
+        transform.position = Vector3.MoveTowards(transform.position, Destination[currentDestination].transform.position, 10 * multiplier * Time.deltaTime);
     }
 
     public void OnTriggerStay(Collider other)

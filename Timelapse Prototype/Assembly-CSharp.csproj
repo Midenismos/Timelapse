@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\RewindableLight.cs" />
     <Compile Include="Assets\Scripts\RewindablePhysicsObject.cs" />
     <Compile Include="Assets\Scripts\RewindableRotatingCube.cs" />
+    <Compile Include="Assets\Scripts\RewindableTrain.cs" />
     <Compile Include="Assets\Scripts\RotatingCube.cs" />
     <Compile Include="Assets\Scripts\TestVictoryDigicode.cs" />
     <Compile Include="Assets\Scripts\TimeChanger.cs" />
