@@ -26,7 +26,7 @@ public class RewindableTrain : Rewindable
                 train.previousDestination = train.Destination.Length - 1;
             }
         }
-        train.transform.position = Vector3.MoveTowards(transform.position, train.Destination[train.previousDestination].transform.position, 10 * deltaGameTime);
+        train.transform.position = Vector3.MoveTowards(transform.position, train.Destination[train.previousDestination].transform.position, train.speed * deltaGameTime);
         
 
     }

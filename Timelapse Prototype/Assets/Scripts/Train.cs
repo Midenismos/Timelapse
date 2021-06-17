@@ -9,6 +9,7 @@ public class Train : MonoBehaviour
     public int currentDestination = 0;
     public int previousDestination = 0;
 
+    public float speed = 0;
 
     public float multiplier = 1f;
 
@@ -38,7 +39,7 @@ public class Train : MonoBehaviour
                 currentDestination = 0;
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, Destination[currentDestination].transform.position, 10 * multiplier * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, Destination[currentDestination].transform.position, speed * multiplier * Time.deltaTime);
     }
 
     public void OnTriggerStay(Collider other)
