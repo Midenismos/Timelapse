@@ -16,24 +16,19 @@ public class BehaviourPlayer : MonoBehaviour
     public float jumpHeight = 3f;
 
     [SerializeField] private float jumpImpulsion = 5;
-
-    public Vector3 velocity;
-
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    [SerializeField] private float maxfallDistance = 5;
 
     [SerializeField] private float pickupDistance = 3;
     [SerializeField] private LayerMask pickupMask;
 
-    bool isGrounded;
 
-    private GameObject TimeManager;
+    private TimeManager timeManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        TimeManager = GameObject.Find("TimeManager");
+        timeManager = FindObjectOfType<TimeManager>();
+        playerController.OnCharacterLanded += PlayerLanded;
     }
 
     // Update is called once per frame
@@ -41,27 +36,14 @@ public class BehaviourPlayer : MonoBehaviour
     {
         // Nouvelle façon de déplacer le joueur à partir de la vidéo de Brackey
         // Le code de la rotation du joueur par rapport à la souris a été déplacé vers MouseLook
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
         Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
-        
         playerController.Move(move * speed / Time.timeScale);
-
-        //velocity.y += gravity * Time.deltaTime;
-
-        //controller.Move(velocity * Time.deltaTime);
-        //playerController.Move(velocity * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump")&& isGrounded)
+     
+        if (Input.GetButtonDown("Jump"))
         {
             playerController.Jump(jumpImpulsion);
         }
@@ -87,7 +69,7 @@ public class BehaviourPlayer : MonoBehaviour
         {
             if (hit.collider.tag == "Button" )
             {
-                if(TimeManager.GetComponent<TimeManager>().multiplier !=0)
+                if(timeManager.multiplier !=0)
                 {
                     if (Input.GetKeyDown("e") == true)
                     {
@@ -144,6 +126,14 @@ public class BehaviourPlayer : MonoBehaviour
     //    }
     //}
 
+    private void PlayerLanded(float fallenDistance)
+    {
+        if(fallenDistance >= maxfallDistance)
+        {
+            Die();
+        }
+    }
+
     private void TryPickupItem()
     {
         RaycastHit hit;
@@ -152,5 +142,10 @@ public class BehaviourPlayer : MonoBehaviour
         {
             pickup = hit.collider.gameObject;
         } 
+    }
+
+    private void Die()
+    {
+        timeManager.RestartLoop();
     }
 }

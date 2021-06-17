@@ -263,12 +263,8 @@ MonoBehaviour:
   speed: 6
   gravity: -19.62
   jumpHeight: 1
-  velocity: {x: 0, y: 0, z: 0}
-  groundCheck: {fileID: 4969502796025151692}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 256
+  jumpImpulsion: 5
+  maxfallDistance: 5
   pickupDistance: 1.5
   pickupMask:
     serializedVersion: 2
@@ -286,6 +282,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1981618737584201179}
+  groundCheck: {fileID: 4969502796025151692}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!136 &384815271425159047
 CapsuleCollider:
   m_ObjectHideFlags: 0

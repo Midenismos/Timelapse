@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingCube : MonoBehaviour
+public class RotatingCube : MonoBehaviour, ITimeStoppable
 {
     //Touchez à cette variable pour le LD
     [SerializeField]
@@ -11,6 +11,8 @@ public class RotatingCube : MonoBehaviour
     //Ne pas toucher à ces variables
     public float multiplier = 1f;
     private TimeManager timeManager;
+
+    private bool isStopped = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +28,22 @@ public class RotatingCube : MonoBehaviour
 
         //Tourne l'item en fonction du multiplier
         //OLD CODE : gameObject.transform.Rotate(0, BaseSpeed * multiplier, 0);
-        Rotate(Time.deltaTime * timeManager.multiplier);
+        if(!isStopped)
+            Rotate(Time.deltaTime);
     }
 
     public void Rotate(float deltaGameTime)
     {
         gameObject.transform.Rotate(0, BaseSpeed * deltaGameTime, 0);
     }
+
+    public void StartTimeStop()
+    {
+        isStopped = true;
+    }
+    public void EndTimeStop()
+    {
+        isStopped = false;
+    }
+
 }
