@@ -30,12 +30,16 @@ public class Card : MonoBehaviour
         //Fait apparaître le gameObject Whole si la carte n'est pas cassée
         if (isBroken == false)
         {
-            whole.gameObject.SetActive(true);
+            foreach (GameObject brokenPart in broken)
+            {
+                brokenPart.gameObject.SetActive(false);
+                whole.gameObject.SetActive(true);
+            }
         }
         // Retire le gameObject Whole et fait apparaître les deux gameObject Broken si la carte est cassée
         else
         {
-            foreach(GameObject brokenPart in broken)
+            foreach (GameObject brokenPart in broken)
             {
                 brokenPart.gameObject.SetActive(true);
                 whole.gameObject.SetActive(false);

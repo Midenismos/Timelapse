@@ -48,7 +48,8 @@ public class RewindManager : MonoBehaviour
         }
         else
         {
-            RecordRewindables();
+            if(!timeManager.IsTimeStopped)
+                RecordRewindables();
         }
     }
 

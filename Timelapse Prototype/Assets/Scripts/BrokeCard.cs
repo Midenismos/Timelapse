@@ -11,7 +11,7 @@ public class BrokeCard : MonoBehaviour
     //Casse la carte si le joueur marche dessus (entre en contact avec le boxCollider du GameObject Whole
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.name == "FeetCollider")
         {
             card.isBroken = true;
             card.timerSinceBroken = 0;

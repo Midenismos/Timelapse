@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public enum TimeChangeType
 {
@@ -50,11 +51,17 @@ public class TimeManager : MonoBehaviour
 
     private Coroutine TimeLerpCoroutine = null;
 
+    private List<ITimeStoppable> timeStoppables = new List<ITimeStoppable>();
+
+    public bool IsTimeStopped { get => multiplier == 0;}
+
     // Start is called before the first frame update
     void Start()
     {
         //multiplier = startingMultiplier;
         rewindManager.OnRewindStopped += RewindStopped;
+
+        timeStoppables = FindObjectsOfType<UnityEngine.Object>().OfType<ITimeStoppable>().ToList();
     }
 
     // Update is called once per frame
@@ -63,6 +70,7 @@ public class TimeManager : MonoBehaviour
 
         if (!rewindManager.isRewinding)
         {
+            if(!IsTimeStopped)
             currentLoopTime += Time.deltaTime;
 
             if(currentLoopTime >= loopDuration)
@@ -213,14 +221,14 @@ public class TimeManager : MonoBehaviour
 
     private void StartRewind(float speed, float duration)
     {
-        multiplier = 0;
+        ChangeTimeScale(0);
         hasTimeChange = true;
         rewindManager.StartRewind(speed, duration);
     }
 
     private void RewindStopped()
     {
-        multiplier = 1;
+        ChangeTimeScale(1);
 
         hasTimeChange = false;
     }
@@ -241,13 +249,11 @@ public class TimeManager : MonoBehaviour
         while (timeCounter < duration)
         {
             timeCounter += Time.unscaledDeltaTime;
-            //multiplier = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
-            //Time.timeScale = Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration);
+            
             ChangeTimeScale(Mathf.Lerp(oldMultiplier, newMultiplier, timeCounter / duration));
             yield return null;
         }
-        //multiplier = newMultiplier;
-        //Time.timeScale = newMultiplier;
+        
         ChangeTimeScale(newMultiplier);
     }
 
@@ -275,7 +281,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void RestartLoop()
+    public void RestartLoop()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -292,7 +298,41 @@ public class TimeManager : MonoBehaviour
 
     private void ChangeTimeScale (float newTimeScale)
     {
-        Time.timeScale = newTimeScale;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale; 
+        float oldMultiplier = multiplier;
+        multiplier = newTimeScale;
+        if(multiplier != 0)
+        {
+            Time.timeScale = newTimeScale;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+            if(oldMultiplier == 0)
+            {
+                ResumeTime();
+            }
+        } else {
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 0.02f;
+
+            if(oldMultiplier != 0)
+            {
+                StopTime();
+            }
+        }
+    }
+
+    private void StopTime()
+    {
+        for (int i = 0; i < timeStoppables.Count; i++)
+        {
+            timeStoppables[i].StartTimeStop();
+        }
+    }
+
+    private void ResumeTime()
+    {
+        for (int i = 0; i < timeStoppables.Count; i++)
+        {
+            timeStoppables[i].EndTimeStop();
+        }
     }
 }
