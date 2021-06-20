@@ -675,7 +675,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1594,6 +1594,7 @@ GameObject:
   - component: {fileID: 603508357}
   - component: {fileID: 603508356}
   - component: {fileID: 603508360}
+  - component: {fileID: 603508361}
   m_Layer: 0
   m_Name: FallingCube
   m_TagString: Untagged
@@ -1703,6 +1704,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e13f341de2070b4e97418cbb51b0cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &603508361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603508354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425864061234349449505facea9ee0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 603508356}
 --- !u!1001 &645212373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2077,7 +2091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &721357417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2475,7 +2489,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14532
+  m_Name: pb_Mesh24948
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

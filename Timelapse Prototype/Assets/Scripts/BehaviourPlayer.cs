@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class BehaviourPlayer : MonoBehaviour
 {
-    public GameObject pickup = null;
-    public new Camera camera = null;
 
-    public CharacterController controller;
 
-    [SerializeField] private PlayerController playerController = null;
-
-    public float speed = 12f;
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
-
+    [Header("Movement Settings")]
+    [SerializeField] private float speed = 12f;
     [SerializeField] private float jumpImpulsion = 5;
     [SerializeField] private float maxfallDistance = 5;
 
+    [Header("References")]
+    [SerializeField] private new Camera camera = null;
+    [SerializeField] private PlayerController playerController = null;
+
+    [Header("Pickup")]
     [SerializeField] private float pickupDistance = 3;
     [SerializeField] private LayerMask pickupMask;
+    [SerializeField] private Transform hand = null;
+
+    [Header("Crouching References")]
+    [SerializeField] private CapsuleCollider standingCollider = null;
+    [SerializeField] private CapsuleCollider crouchingCollider = null;
+    [SerializeField] private Transform standingCameraPosition = null;
+    [SerializeField] private Transform crouchingCameraPosition = null;
 
 
     private TimeManager timeManager;
+
+    private GameObject pickup = null;
+
+    private bool isCrouched = false;
 
     // Start is called before the first frame update
     void Start()
@@ -99,32 +108,24 @@ public class BehaviourPlayer : MonoBehaviour
                 pickup = null;
             }
         }
-    }
 
-    void FixedUpdate()
-    {
-        //Colle l'item porté par le joueur près de lui
-        if (pickup != null)
+        if(Input.GetKeyDown("c"))
         {
-            pickup.transform.parent = gameObject.transform;
+            if(isCrouched)
+            {
+                camera.transform.position = standingCameraPosition.position;
+                standingCollider.enabled = true;
+                crouchingCollider.enabled = false;
+                isCrouched = false;
+            } else
+            {
+                camera.transform.position = crouchingCameraPosition.position;
+                standingCollider.enabled = false;
+                crouchingCollider.enabled = true;
+                isCrouched = true;
+            }
         }
     }
-
-
-    //Permet au joueur de prendre des items
-    //public void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Pickup")
-    //    {
-    //        if (pickup == null)
-    //        {
-    //            if (Input.GetKeyDown("a"))
-    //            {
-    //                pickup = other.gameObject;
-    //            }
-    //        }
-    //    }
-    //}
 
     private void PlayerLanded(float fallenDistance)
     {
@@ -141,6 +142,8 @@ public class BehaviourPlayer : MonoBehaviour
         if (Physics.Raycast(new Ray(camera.transform.position, camera.transform.forward), out hit, pickupDistance, pickupMask))
         {
             pickup = hit.collider.gameObject;
+            pickup.transform.parent = hand;
+            pickup.transform.position = hand.position;
         } 
     }
 

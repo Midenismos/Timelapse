@@ -57,7 +57,7 @@ public class RewindManager : MonoBehaviour
     {
         for (int i = 0; i < rewindables.Length; i++)
         {
-            rewindables[i].Record();
+            rewindables[i].Record(timeManager.currentLoopTime);
         }
     }
 
@@ -65,7 +65,7 @@ public class RewindManager : MonoBehaviour
     {
         for (int i = 0; i < rewindables.Length; i++)
         {
-            rewindables[i].Rewind(deltaGameTime, rewindTimeCounter);
+            rewindables[i].Rewind(deltaGameTime, timeManager.currentLoopTime);
         }
     }
 

@@ -35,7 +35,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private RewindManager rewindManager = null;
     
     public float multiplier = 1;
-    public float timer = 0f;
+    public float timeChangeTimer= 0f;
 
     public float currentLoopTime = 0;
     public float currentTolerance = 0;
@@ -80,9 +80,9 @@ public class TimeManager : MonoBehaviour
         }
         if(hasStandartTimeChange)
         {
-            timer -= Time.unscaledDeltaTime;
+            timeChangeTimer -= Time.unscaledDeltaTime;
 
-            if(timer <= 0)
+            if(timeChangeTimer <= 0)
             {
                 EndStandartTimeChange();
             }
@@ -113,7 +113,7 @@ public class TimeManager : MonoBehaviour
                 if (timeChange.type == TimeChangeType.REWIND)
                 {
                     EndStandartTimeChange(false);
-                    StartRewind(timeChange.speed, timer + timeChange.duration);
+                    StartRewind(timeChange.speed, timeChangeTimer + timeChange.duration);
                 }
                 else if (timeChange.type == TimeChangeType.STOP)
                 {
@@ -126,7 +126,7 @@ public class TimeManager : MonoBehaviour
                 }
                 else if (timeChange.type == TimeChangeType.SLOW)
                 {
-                    timer += timeChange.duration;
+                    timeChangeTimer += timeChange.duration;
                 }
             }
             else if (currentTimeChange.type == TimeChangeType.ACCELERATE)
@@ -134,7 +134,7 @@ public class TimeManager : MonoBehaviour
                 if (timeChange.type == TimeChangeType.REWIND)
                 {
                     EndStandartTimeChange(false);
-                    StartRewind(timeChange.speed, timer + timeChange.duration);
+                    StartRewind(timeChange.speed, timeChangeTimer + timeChange.duration);
                 }
                 else if (timeChange.type == TimeChangeType.STOP)
                 {
@@ -147,7 +147,7 @@ public class TimeManager : MonoBehaviour
                 }
                 else if (timeChange.type == TimeChangeType.ACCELERATE)
                 {
-                    timer += timeChange.duration;
+                    timeChangeTimer += timeChange.duration;
                 }
             } else if(currentTimeChange.type == TimeChangeType.REWIND)
             {
@@ -171,7 +171,7 @@ public class TimeManager : MonoBehaviour
                     mustResumeCurrentTimeChange = true;
                 } else if(timeChange.type == TimeChangeType.STOP)
                 {
-                    timer += timeChange.duration;
+                    timeChangeTimer += timeChange.duration;
                 } else if(timeChange.type == TimeChangeType.SLOW || timeChange.type == TimeChangeType.ACCELERATE)
                 {
                     currentTimeChange = timeChange;
@@ -185,7 +185,7 @@ public class TimeManager : MonoBehaviour
 
     private void StartStandartTimeChange(float speed, float duration)
     {
-        timer = duration;
+        timeChangeTimer = duration;
         hasTimeChange = true;
         hasStandartTimeChange = true;
 
@@ -262,7 +262,7 @@ public class TimeManager : MonoBehaviour
         if(currentTimeChange.type == TimeChangeType.SLOW  || currentTimeChange.type == TimeChangeType.ACCELERATE)
         {
             EndStandartTimeChange(false);
-            currentTimeChange.duration = timer;
+            currentTimeChange.duration = timeChangeTimer;
         } else if (currentTimeChange.type == TimeChangeType.REWIND)
         {
             currentTimeChange.duration = rewindManager.EndRewind();
