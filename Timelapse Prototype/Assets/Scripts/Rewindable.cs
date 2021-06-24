@@ -8,7 +8,7 @@ public class Rewindable : MonoBehaviour
     {
     }
 
-    public virtual void Rewind(float deltaGameTime, float totalTime)
+    public virtual void Rewind(float deltaGameTime, float timeStamp)
     {
 
     }
@@ -18,7 +18,7 @@ public class Rewindable : MonoBehaviour
 
     }
 
-    public virtual void Record()
+    public virtual void Record(float timeStamp)
     {
 
     }
