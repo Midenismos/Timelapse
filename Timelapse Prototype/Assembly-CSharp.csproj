@@ -74,6 +74,10 @@
     <Compile Include="Assets\Scripts\FlickeringLight.cs" />
     <Compile Include="Assets\Scripts\IInteractable.cs" />
     <Compile Include="Assets\Scripts\ITimeStoppable.cs" />
+    <Compile Include="Assets\Scripts\Investigation\InvestigationCharacterData.cs" />
+    <Compile Include="Assets\Scripts\Investigation\InvestigationDataBase.cs" />
+    <Compile Include="Assets\Scripts\Investigation\InvestigationItemData.cs" />
+    <Compile Include="Assets\Scripts\Investigation\InvestigationWidgetData.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\ObjectReceiver.cs" />
     <Compile Include="Assets\Scripts\ObjectSpawner.cs" />

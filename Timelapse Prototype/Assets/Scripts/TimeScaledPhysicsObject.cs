@@ -9,6 +9,10 @@ public class TimeScaledPhysicsObject : MonoBehaviour, ITimeStoppable
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+
+        TimeManager timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
     }
     public void StartTimeStop()
     {
@@ -18,5 +22,12 @@ public class TimeScaledPhysicsObject : MonoBehaviour, ITimeStoppable
     public void EndTimeStop()
     {
         body.isKinematic = false;
+    }
+
+    private void OnDestroy()
+    {
+        TimeManager timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
     }
 }

@@ -23,6 +23,8 @@ public class Button : MonoBehaviour, IInteractable, ITimeStoppable
     void Start()
     {
         timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
     }
 
     // Update is called once per frame
@@ -69,5 +71,11 @@ public class Button : MonoBehaviour, IInteractable, ITimeStoppable
     public void EndTimeStop()
     {
         //TODO
+    }
+
+    private void OnDestroy()
+    {
+        if (timeManager)
+            timeManager.UnRegisterTimeStoppable(this);
     }
 }

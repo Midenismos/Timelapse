@@ -17,6 +17,9 @@ public class FallingCubeSpawner : MonoBehaviour, ITimeStoppable
         transform.position = cube.position;
 
         timeManager = FindObjectOfType<TimeManager>();
+
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
     }
 
     // Update is called once per frame

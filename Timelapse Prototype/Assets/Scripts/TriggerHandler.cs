@@ -8,18 +8,6 @@ public class TriggerHandler : MonoBehaviour
     public UnityEvent TriggerEnter;
     public UnityEvent TriggerExit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         TriggerEnter?.Invoke();
