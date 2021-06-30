@@ -5,6 +5,13 @@ using UnityEngine;
 public class Door : Rewindable, ITimeStoppable
 {
     [SerializeField] private Animator animator = null;
+
+    private void Start()
+    {
+        TimeManager timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
+    }
     public void StartTimeStop()
     {
         animator.enabled = false;
@@ -23,5 +30,12 @@ public class Door : Rewindable, ITimeStoppable
     public override void EndRewind()
     {
         base.EndRewind();
+    }
+
+    private void OnDestroy()
+    {
+        TimeManager timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
     }
 }
