@@ -5037,7 +5037,7 @@ GameObject:
   - component: {fileID: 384815271425159047}
   - component: {fileID: 596253315457810955}
   - component: {fileID: 1981618737584201179}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5080,12 +5080,16 @@ MonoBehaviour:
   jumpImpulsion: 5
   maxfallDistance: 5
   camera: {fileID: 3929148789461630442}
-  playerController: {fileID: 8393884417921498152}
+  playerMovement: {fileID: 8393884417921498152}
   pickupDistance: 1.5
   pickupMask:
     serializedVersion: 2
     m_Bits: 512
   hand: {fileID: 7125471980354680177}
+  interactDistance: 3
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4096
   standingCollider: {fileID: 384815271425159047}
   crouchingCollider: {fileID: 596253315457810955}
   standingCameraPosition: {fileID: 5834969725226905631}

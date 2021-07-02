@@ -58,10 +58,11 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //multiplier = startingMultiplier;
+        multiplier = startingMultiplier;
         rewindManager.OnRewindStopped += RewindStopped;
 
-        timeStoppables = FindObjectsOfType<UnityEngine.Object>().OfType<ITimeStoppable>().ToList();
+        //Find other way to gather timestoppables
+        //timeStoppables = FindObjectsOfType<UnityEngine.Object>().OfType<ITimeStoppable>().ToList();
     }
 
     // Update is called once per frame
@@ -87,6 +88,16 @@ public class TimeManager : MonoBehaviour
                 EndStandartTimeChange();
             }
         }
+    }
+
+    public void RegisterTimeStoppable(ITimeStoppable timeStoppable)
+    {
+        timeStoppables.Add(timeStoppable);
+    }
+
+    public void UnRegisterTimeStoppable(ITimeStoppable timeStoppable)
+    {
+        timeStoppables.Remove(timeStoppable);
     }
 
     //Commence le changement de temps (appellé par un TimeChanger)
