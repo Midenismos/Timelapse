@@ -5073,19 +5073,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3929148790046709050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bea29c4aab5050949b0c0deb5e38635d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6139aaf1bd0224841852bdff34af1a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 12
   jumpImpulsion: 5
   maxfallDistance: 5
   camera: {fileID: 3929148789461630442}
   playerMovement: {fileID: 8393884417921498152}
-  pickupDistance: 1.5
+  mouseLook: {fileID: 7806022498631546824}
+  pickupDistance: 3
   pickupMask:
     serializedVersion: 2
     m_Bits: 512
-  hand: {fileID: 7125471980354680177}
+  hand: {fileID: 0}
   interactDistance: 3
   interactMask:
     serializedVersion: 2
@@ -5094,6 +5095,7 @@ MonoBehaviour:
   crouchingCollider: {fileID: 596253315457810955}
   standingCameraPosition: {fileID: 5834969725226905631}
   crouchingCameraPosition: {fileID: 865336202795924712}
+  investigationPanel: {fileID: 0}
 --- !u!114 &8393884417921498152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5103,7 +5105,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3929148790046709050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c746b0b1ae0839942b3862498f784a79, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d01cf466de020941bd5188480455072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1981618737584201179}
