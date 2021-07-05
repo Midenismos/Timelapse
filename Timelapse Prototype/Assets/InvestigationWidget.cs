@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class InvestigationWidget : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject investigationCharacterSheet = null;
+    
+    public void SwitchCharacterSheetVisibility()
     {
-        
+        investigationCharacterSheet.SetActive(!investigationCharacterSheet.activeInHierarchy);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EventDoubleClicked()
     {
-        
+        SwitchCharacterSheetVisibility();
     }
 }
