@@ -56,18 +56,26 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Sci-Fi Style_2\About\Scripts\Readme.cs" />
-     <Compile Include="Assets\Scripts\BehaviourPlayer.cs" />
      <Compile Include="Assets\Scripts\BrokeCard.cs" />
      <Compile Include="Assets\Scripts\Button.cs" />
      <Compile Include="Assets\Scripts\CandyMachine.cs" />
      <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\Digicode.cs" />
      <Compile Include="Assets\Scripts\DigicodeButton.cs" />
+     <Compile Include="Assets\Scripts\Door.cs" />
      <Compile Include="Assets\Scripts\FallingCubeSpawner.cs" />
      <Compile Include="Assets\Scripts\FlickeringLight.cs" />
+     <Compile Include="Assets\Scripts\IInteractable.cs" />
      <Compile Include="Assets\Scripts\ITimeStoppable.cs" />
+     <Compile Include="Assets\Scripts\Investigation\InvestigationCharacterData.cs" />
+     <Compile Include="Assets\Scripts\Investigation\InvestigationDataBase.cs" />
+     <Compile Include="Assets\Scripts\Investigation\InvestigationItemData.cs" />
+     <Compile Include="Assets\Scripts\Investigation\InvestigationWidgetData.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\ObjectReceiver.cs" />
+     <Compile Include="Assets\Scripts\ObjectSpawner.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\RewindManager.cs" />
      <Compile Include="Assets\Scripts\Rewindable.cs" />
      <Compile Include="Assets\Scripts\RewindableButton.cs" />
@@ -81,8 +89,9 @@
      <Compile Include="Assets\Scripts\TestVictoryDigicode.cs" />
      <Compile Include="Assets\Scripts\TimeChanger.cs" />
      <Compile Include="Assets\Scripts\TimeManager.cs" />
+     <Compile Include="Assets\Scripts\TimeScaledPhysicsObject.cs" />
      <Compile Include="Assets\Scripts\Train.cs" />
-     <Compile Include="Assets\TimeScaledPhysicsObject.cs" />
+     <Compile Include="Assets\Scripts\TriggerHandler.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\ExternalPacks\SciFiFoodPackage\ReadMe.txt" />
