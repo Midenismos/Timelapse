@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Rewindable : MonoBehaviour
 {
+    private void Start()
+    {
+        RewindManager rewindManager = FindObjectOfType<RewindManager>();
+        if(rewindManager)
+        {
+            rewindManager.RegisterRewindable(this);
+        }
+    }
     public virtual void StartRewind()
     {
     }
 
-    public virtual void Rewind(float deltaGameTime, float totalTime)
+    public virtual void Rewind(float deltaGameTime, float timeStamp)
     {
 
     }
@@ -18,8 +26,17 @@ public class Rewindable : MonoBehaviour
 
     }
 
-    public virtual void Record()
+    public virtual void Record(float timeStamp)
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        RewindManager rewindManager = FindObjectOfType<RewindManager>();
+        if (rewindManager)
+        {
+            rewindManager.UnRegisterRewindable(this);
+        }
     }
 }

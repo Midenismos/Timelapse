@@ -7,7 +7,7 @@ public class RewindManager : MonoBehaviour
 {
     public event Action OnRewindStopped = null;
 
-    private Rewindable[] rewindables = null;
+    private List<Rewindable> rewindables = new List<Rewindable>();
     private float rewindDuration = 0;
     private float rewindSpeed = 0;
     private float rewindTimeCounter = 0;
@@ -18,8 +18,6 @@ public class RewindManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rewindables = FindObjectsOfType<Rewindable>();
-
         timeManager = FindObjectOfType<TimeManager>();
     }
 
@@ -53,19 +51,29 @@ public class RewindManager : MonoBehaviour
         }
     }
 
+    public void RegisterRewindable(Rewindable rewindable)
+    {
+        rewindables.Add(rewindable);
+    }
+
+    public void UnRegisterRewindable(Rewindable rewindable)
+    {
+        rewindables.Remove(rewindable);
+    }
+
     private void RecordRewindables()
     {
-        for (int i = 0; i < rewindables.Length; i++)
+        for (int i = 0; i < rewindables.Count; i++)
         {
-            rewindables[i].Record();
+            rewindables[i].Record(timeManager.currentLoopTime);
         }
     }
 
     private void RewindRewindables(float deltaGameTime)
     {
-        for (int i = 0; i < rewindables.Length; i++)
+        for (int i = 0; i < rewindables.Count; i++)
         {
-            rewindables[i].Rewind(deltaGameTime, rewindTimeCounter);
+            rewindables[i].Rewind(deltaGameTime, timeManager.currentLoopTime);
         }
     }
 
@@ -76,7 +84,7 @@ public class RewindManager : MonoBehaviour
 
         rewindTimeCounter = 0;
 
-        for (int i = 0; i < rewindables.Length; i++)
+        for (int i = 0; i < rewindables.Count; i++)
         {
             rewindables[i].StartRewind();
         }
@@ -86,7 +94,7 @@ public class RewindManager : MonoBehaviour
 
     public float EndRewind()
     {
-        for (int i = 0; i < rewindables.Length; i++)
+        for (int i = 0; i < rewindables.Count; i++)
         {
             rewindables[i].EndRewind();
         }

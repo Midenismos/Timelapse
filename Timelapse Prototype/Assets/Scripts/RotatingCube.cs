@@ -19,6 +19,9 @@ public class RotatingCube : MonoBehaviour, ITimeStoppable
     {
         //Connecte l'objet au TimeManager
         timeManager = FindObjectOfType<TimeManager>();
+
+        if (timeManager)
+            timeManager.RegisterTimeStoppable(this);
     }
 
     // Update is called once per frame
@@ -44,6 +47,12 @@ public class RotatingCube : MonoBehaviour, ITimeStoppable
     public void EndTimeStop()
     {
         isStopped = false;
+    }
+
+    private void OnDestroy()
+    {
+        if (timeManager)
+            timeManager.UnRegisterTimeStoppable(this);
     }
 
 }
