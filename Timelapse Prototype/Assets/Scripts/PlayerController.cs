@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
 
     private IInteractable interactableInRange = null;
 
+    private bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +57,10 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
         Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
-        playerMovement.Move(move * speed / Time.timeScale);
+        if (isDead == false)
+        {
+            playerMovement.Move(move * speed / Time.timeScale);
+        }
 
         if (gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.01f && isMovingSound == false)
         {
@@ -81,29 +86,33 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckInteractable();
-     
-        if (Input.GetButtonDown("Jump"))
+
+        if (isDead == false)
         {
-            playerMovement.Jump(jumpImpulsion);
+            if (Input.GetButtonDown("Jump"))
+            {
+                playerMovement.Jump(jumpImpulsion);
+            }
+
+            if (Input.GetButtonDown("Crouch"))
+            {
+                if (isCrouched)
+                {
+                    camera.transform.position = standingCameraPosition.position;
+                    standingCollider.enabled = true;
+                    crouchingCollider.enabled = false;
+                    isCrouched = false;
+                }
+                else
+                {
+                    camera.transform.position = crouchingCameraPosition.position;
+                    standingCollider.enabled = false;
+                    crouchingCollider.enabled = true;
+                    isCrouched = true;
+                }
+            }
         }
 
-        if (Input.GetButtonDown("Crouch"))
-        {
-            if (isCrouched)
-            {
-                camera.transform.position = standingCameraPosition.position;
-                standingCollider.enabled = true;
-                crouchingCollider.enabled = false;
-                isCrouched = false;
-            }
-            else
-            {
-                camera.transform.position = crouchingCameraPosition.position;
-                standingCollider.enabled = false;
-                crouchingCollider.enabled = true;
-                isCrouched = true;
-            }
-        }
 
         // Utilise l'item porté
         if (Input.GetButtonDown("Interact"))
@@ -230,6 +239,8 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator Death()
     {
+        // Empêche le joueur de bouger afin de simuler une "animation de mort" pendant la durée du son de mort et relance la loop une fois le son terminé.
+        isDead = true;
         yield return new WaitForSeconds(FindObjectOfType<SoundManager>().FindSound("Death").length);
         timeManager.RestartLoop();
         yield return null;
@@ -237,6 +248,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        // Lance la couroutine de mort du joueur
         FindObjectOfType<SoundManager>().Play("Death");
         StartCoroutine("Death");
     }

@@ -15,10 +15,13 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = true;
     private float fallenDistance = 0;
 
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -31,11 +34,14 @@ public class PlayerMovement : MonoBehaviour
         {
             OnCharacterLanded?.Invoke(fallenDistance);
             fallenDistance = 0;
-            FindObjectOfType<SoundManager>().Play("Jump");
-            FindObjectOfType<SoundManager>().ChangePitch("Jump");
         } else if(!isGrounded && body.velocity.y < 0)
         {
             fallenDistance -= body.velocity.y * Time.unscaledDeltaTime;
+        }
+        if (isGrounded && body.velocity.y <-8)
+        {
+            FindObjectOfType<SoundManager>().ChangePitch("Jump");
+            FindObjectOfType<SoundManager>().Play("Jump");
         }
     }
 

@@ -6,6 +6,7 @@ public class Door : Rewindable, ITimeStoppable
 {
     [SerializeField] private Animator animator = null;
     [SerializeField] private string cardName = null;
+    private bool isOpen = false;
 
 
     private void Start()
@@ -41,26 +42,32 @@ public class Door : Rewindable, ITimeStoppable
             timeManager.RegisterTimeStoppable(this);
     }
 
+    // ouvre et ferme la porte
     public void OpenDoor()
     {
         animator.SetBool("character_nearby", true);
+        isOpen = true;
     }
     public void CloseDoor()
     {
         animator.SetBool("character_nearby", false);
+        isOpen = false;
     }
 
+    // vérifie que le joueur possède la bonne carte d'accès
     public void ScanCard(GameObject Player)
     {
-        Debug.Log("Searching");
         if (Player.GetComponent<PlayerController>().pickup != null)
         {
             if (Player.GetComponent<PlayerController>().pickup.name == cardName)
             {
                 if (Player.GetComponent<PlayerController>().pickup.GetComponent<Card>().isBroken == false)
                 {
-                    FindObjectOfType<SoundManager>().Play("AccessGranted");
-                    OpenDoor();
+                    if (isOpen == false)
+                    {
+                        OpenDoor();
+                        FindObjectOfType<SoundManager>().Play("AccessGranted");
+                    }
                 }
                 else
                 {

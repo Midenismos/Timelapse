@@ -5079,6 +5079,7 @@ MonoBehaviour:
   speed: 12
   jumpImpulsion: 5
   maxfallDistance: 5
+  isMovingSound: 0
   camera: {fileID: 3929148789461630442}
   playerMovement: {fileID: 8393884417921498152}
   pickupDistance: 3
@@ -5094,6 +5095,7 @@ MonoBehaviour:
   crouchingCollider: {fileID: 596253315457810955}
   standingCameraPosition: {fileID: 5834969725226905631}
   crouchingCameraPosition: {fileID: 865336202795924712}
+  pickup: {fileID: 0}
 --- !u!114 &8393884417921498152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5112,6 +5114,11 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  isGrounded: 1
+  stepRayUpper: {fileID: 0}
+  stepRayLower: {fileID: 0}
+  stepHeight: 0.5
+  stepSmooth: 0.1
 --- !u!136 &384815271425159047
 CapsuleCollider:
   m_ObjectHideFlags: 0
