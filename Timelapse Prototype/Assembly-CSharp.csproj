@@ -101,6 +101,7 @@
      <None Include="Assets\ExternalPacks\SciFiFoodPackage\ReadMe.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\FreeLabAssets\Shaders\SBS_Mana.shader" />
      <None Include="Assets\ExternalPacks\SciFiFoodPackage\T3menu_3\ReadMe.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
