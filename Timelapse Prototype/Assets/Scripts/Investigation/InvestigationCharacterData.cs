@@ -15,6 +15,16 @@ public class InvestigationCharacterData : InvestigationItemData
     public string nationality = "";
     public Texture2D portrait = null;
 
+    public InvestigationCharacterData()
+    {
+
+    }
+
+    public InvestigationCharacterData(Vector2 position)
+    {
+        this.widgetData = new InvestigationWidgetData(position);
+    }
+
     public InvestigationCharacterData(string name, string firstname, string nickname, string job, float height, float weight, float iD, float age, string bloodGroup, string nationality, Texture2D portrait)
     {
         this.name = name;
@@ -28,7 +38,5 @@ public class InvestigationCharacterData : InvestigationItemData
         this.bloodGroup = bloodGroup;
         this.nationality = nationality;
         this.portrait = portrait;
-
-        this.widgetData = new InvestigationWidgetData();
     }
 }

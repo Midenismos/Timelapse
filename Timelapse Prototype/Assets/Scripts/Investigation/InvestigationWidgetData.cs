@@ -12,6 +12,11 @@ public enum InvestigationLinkType
 public class InvestigationWidgetData
 {
     public Vector2 position;
+    
+    public InvestigationWidgetData(Vector2 position)
+    {
+        this.position = position;
+    }
 }
 
 public class InvestigationLinkData

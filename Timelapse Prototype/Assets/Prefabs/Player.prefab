@@ -5086,7 +5086,7 @@ MonoBehaviour:
   pickupMask:
     serializedVersion: 2
     m_Bits: 512
-  hand: {fileID: 0}
+  hand: {fileID: 7125471980354680177}
   interactDistance: 3
   interactMask:
     serializedVersion: 2
