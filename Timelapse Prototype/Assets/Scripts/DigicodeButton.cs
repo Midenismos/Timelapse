@@ -8,16 +8,4 @@ public class DigicodeButton : MonoBehaviour
     public int ButtonOrderNumber = 0;
 
     public bool CheckedButton = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
