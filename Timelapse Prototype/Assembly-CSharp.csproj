@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\InvestigationLink.cs" />
     <Compile Include="Assets\InvestigationPanel.cs" />
     <Compile Include="Assets\InvestigationWidget.cs" />
     <Compile Include="Assets\Sci-Fi Style_2\About\Scripts\Readme.cs" />

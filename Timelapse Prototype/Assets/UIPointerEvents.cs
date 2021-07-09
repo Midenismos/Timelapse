@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class UIPointerEvents : MonoBehaviour, IPointerClickHandler
 {
-    public UnityEvent OnClick;
+    public PointerDataGameObjectEvent OnClick;
     public PointerDataGameObjectEvent OnDoubleClick;
     public UnityEvent OnRightClick;
 
@@ -19,7 +19,7 @@ public class UIPointerEvents : MonoBehaviour, IPointerClickHandler
         {
             if(eventData.clickCount == 1)
             {
-                OnClick?.Invoke();
+                OnClick?.Invoke(eventData, gameObject);
             }
 
             if(eventData.clickCount == 2)

@@ -24,4 +24,11 @@ public class InvestigationLinkData
     public InvestigationWidgetData widgetA = null;
     public InvestigationWidgetData widgetB = null;
     public InvestigationLinkType linkType;
+
+    public InvestigationLinkData(InvestigationWidgetData widgetA, InvestigationWidgetData widgetB, InvestigationLinkType type)
+    {
+        this.widgetA = widgetA;
+        this.widgetB = widgetB;
+        this.linkType = type;
+    }
 }

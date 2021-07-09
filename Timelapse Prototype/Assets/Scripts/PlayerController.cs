@@ -144,6 +144,11 @@ public class PlayerController : MonoBehaviour
         {
             OpenInvestigationPressed();
         }
+
+        if(Input.GetKeyDown(KeyCode.Equals))
+        {
+            timeManager.RestartLoop();
+        }
     }
 
     public void ReleaseHeldObject()
