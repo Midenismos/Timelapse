@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private new Camera camera = null;
     [SerializeField] private PlayerMovement playerMovement = null;
+    [SerializeField] private MouseLook mouseLook = null;
 
     [Header("Pickup")]
     [SerializeField] private float pickupDistance = 3;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform standingCameraPosition = null;
     [SerializeField] private Transform crouchingCameraPosition = null;
 
+    [Header("UIReferences")]
+    [SerializeField] private GameObject investigationPanel = null;
 
     private TimeManager timeManager;
 
@@ -182,12 +185,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       
+        if (Input.GetButtonDown("OpenInvestigation"))
+        {
+            OpenInvestigationPressed();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Equals))
+        {
+            timeManager.RestartLoop();
+        }
     }
 
     public void ReleaseHeldObject()
     {
         pickup = null;
+    }
+
+    private void OpenInvestigationPressed()
+    {
+        if (investigationPanel)
+        {
+            investigationPanel.SetActive(!investigationPanel.activeInHierarchy);
+            mouseLook.ChangeCursorLockMode(!investigationPanel.activeInHierarchy);
+        }
     }
 
     private void PlayerLanded(float fallenDistance)
