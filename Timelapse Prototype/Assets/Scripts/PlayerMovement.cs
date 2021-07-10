@@ -12,13 +12,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
 
     public event Action<float> OnCharacterLanded;
-    private bool isGrounded = true;
+    public bool isGrounded = true;
     private float fallenDistance = 0;
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -34,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
         } else if(!isGrounded && body.velocity.y < 0)
         {
             fallenDistance -= body.velocity.y * Time.unscaledDeltaTime;
+        }
+        if (isGrounded && body.velocity.y <-8)
+        {
+            FindObjectOfType<SoundManager>().ChangePitch("Jump");
+            FindObjectOfType<SoundManager>().Play("Jump");
         }
     }
 

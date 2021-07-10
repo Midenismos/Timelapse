@@ -15,6 +15,8 @@ public class BrokeCard : MonoBehaviour
         {
             card.isBroken = true;
             card.timerSinceBroken = 0;
+            FindObjectOfType<SoundManager>().Play("BreakingCard");
+            FindObjectOfType<SoundManager>().ChangePitch("BreakingCard");
         }
     }
 }

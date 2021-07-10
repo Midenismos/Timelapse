@@ -38,6 +38,8 @@ public class Digicode : MonoBehaviour
     public string executedRewindedFunction;
     public GameObject executedGameObject;
 
+    private bool isActivated = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -125,9 +127,11 @@ public class Digicode : MonoBehaviour
         }
 
 
-        if (currentNumber == maxNumber)
+        if (currentNumber == maxNumber && isActivated == false)
         {
+            FindObjectOfType<SoundManager>().Play("AccessGranted");
             executedGameObject.SendMessage(executedFunction);
+            isActivated = true;
         }
 
     }
@@ -139,6 +143,7 @@ public class Digicode : MonoBehaviour
         {
             button.GetComponent<DigicodeButton>().CheckedButton = false;
             button.GetComponent<Button>().clicked = false;
+            FindObjectOfType<SoundManager>().Play("Fail");
         }
         currentNumber = 0;
     }
@@ -150,6 +155,7 @@ public class Digicode : MonoBehaviour
         if (currentNumber == maxNumber - 1)
         {
             executedGameObject.SendMessage(executedRewindedFunction);
+            isActivated = false;
         }
     }
 }
