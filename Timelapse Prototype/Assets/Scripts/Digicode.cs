@@ -52,7 +52,6 @@ public class Digicode : MonoBehaviour
         {
             button.GetComponent<Button>().buttonActivatedMaterial = activatedMaterial;
             button.GetComponent<Button>().buttonDeactivatedMaterial = deactivatedMaterial;
-
         }
 
     }

@@ -4983,7 +4983,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5021,7 +5021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575bc9c2e501b84f92311a0b336b35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
+  mouseSensitivity: 300
   playerBody: {fileID: 3929148790046709055}
 --- !u!1 &3929148790046709050
 GameObject:
@@ -5113,7 +5113,7 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
 --- !u!136 &384815271425159047
 CapsuleCollider:
   m_ObjectHideFlags: 0
