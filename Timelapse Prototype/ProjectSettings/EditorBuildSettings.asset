@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestFlickeringLight.unity
     guid: eb0f479a8401e2d4f9f6c8a26ef6d5bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NICOLAS.unity
     guid: 080f278596a2a7d47abb42692e08ebe3
+  - enabled: 1
+    path: Assets/Scenes/Micro_Jeanne.unity
+    guid: 50063275809bfaa4aa85a760912b2872
   m_configObjects: {}
