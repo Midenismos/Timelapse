@@ -6,8 +6,15 @@ public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject objectToSpawn = null;
 
+    private GameObject objectInstance = null;
+
     public void SpawnObject()
     {
-        GameObject spawned = Instantiate(objectToSpawn, transform.position, transform.rotation);
+        if (objectInstance)
+        {
+            Destroy(objectInstance);
+        }
+
+        objectInstance = Instantiate(objectToSpawn, transform.position, transform.rotation);
     }
 }

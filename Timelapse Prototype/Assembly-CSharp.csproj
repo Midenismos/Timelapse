@@ -64,6 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ExternalPacks\Sci-Fi Style_2\About\Scripts\Readme.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CannonBehavior.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CreateSinShapedLineStrip.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\ShotBehavior.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\VolumetricMultiLineBehavior.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
+    <Compile Include="Assets\ExternalPacks\VolumetricLines\Scripts\VolumetricLineVertexData.cs" />
     <Compile Include="Assets\InvestigationLink.cs" />
     <Compile Include="Assets\InvestigationPanel.cs" />
     <Compile Include="Assets\InvestigationWidget.cs" />
@@ -113,20 +120,27 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\ExternalPacks\SciFiFoodPackage\ReadMe.txt" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\_LineStripShader.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\ExternalPacks\Kevin Iglesias\3DCharacterDummy\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\ExternalPacks\FreeLabAssets\Shaders\SBS_Mana.shader" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\LineStrip-TextureAlphaBlended.shader" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\SingleLine-TextureAdditive.shader" />
     <None Include="Assets\ExternalPacks\SciFiFoodPackage\T3menu_3\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\_SingleLineShader.cginc" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\LineStrip-TextureAdditive.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\SingleLine-TextureAlphaBlended.shader" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\LineStrip-LightSaber.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\ExternalPacks\VolumetricLines\BuiltInRenderPipeline\Shaders\SingleLine-LightSaber.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />

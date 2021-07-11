@@ -36,7 +36,10 @@ public class TimeScaledPhysicsObject : MonoBehaviour, ITimeStoppable
     {
         if (collision.relativeVelocity.magnitude >1)
         {
-            impactSound.Play();
+            if (impactSound)
+            {
+                impactSound.Play();
+            }
         }
     }
 
