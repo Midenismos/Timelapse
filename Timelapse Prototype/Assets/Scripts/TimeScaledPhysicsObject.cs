@@ -29,7 +29,7 @@ public class TimeScaledPhysicsObject : MonoBehaviour, ITimeStoppable
     {
         TimeManager timeManager = FindObjectOfType<TimeManager>();
         if (timeManager)
-            timeManager.RegisterTimeStoppable(this);
+            timeManager.UnRegisterTimeStoppable(this);
     }
 
     private void OnCollisionEnter(Collision collision)
