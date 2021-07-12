@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : Rewindable, ITimeStoppable
 {
     [SerializeField] private Animator animator = null;
     [SerializeField] private string cardName = null;
+
+    public UnityEvent OnDoorOpened = null;
+
     private bool isOpen = false;
 
 
@@ -45,8 +49,10 @@ public class Door : Rewindable, ITimeStoppable
     // ouvre et ferme la porte
     public void OpenDoor()
     {
-        animator.SetBool("character_nearby", true);
+        //animator.SetBool("character_nearby", true);
+        animator.SetTrigger("Open");
         isOpen = true;
+        OnDoorOpened?.Invoke();
     }
     public void CloseDoor()
     {
@@ -55,18 +61,24 @@ public class Door : Rewindable, ITimeStoppable
     }
 
     // vérifie que le joueur possède la bonne carte d'accès
-    public void ScanCard(GameObject Player)
+    public void ScanCard()
     {
-        if (Player.GetComponent<PlayerController>().pickup != null)
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (isOpen == false)
         {
-            if (Player.GetComponent<PlayerController>().pickup.name == cardName)
+            if (player.pickup != null)
             {
-                if (Player.GetComponent<PlayerController>().pickup.GetComponent<Card>().isBroken == false)
+                if (player.pickup.name == cardName)
                 {
-                    if (isOpen == false)
+                    if (player.pickup.GetComponent<Card>().isBroken == false)
                     {
+
                         OpenDoor();
                         FindObjectOfType<SoundManager>().Play("AccessGranted");
+                    }
+                    else
+                    {
+                        FindObjectOfType<SoundManager>().Play("Fail");
                     }
                 }
                 else
@@ -78,10 +90,6 @@ public class Door : Rewindable, ITimeStoppable
             {
                 FindObjectOfType<SoundManager>().Play("Fail");
             }
-        }
-        else
-        {
-            FindObjectOfType<SoundManager>().Play("Fail");
         }
     }
 }
