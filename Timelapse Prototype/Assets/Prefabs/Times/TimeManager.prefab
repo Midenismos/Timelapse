@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopDuration: 1200
   startingMultiplier: 1
-  timeLerpDuration: 1
+  timeLerpDuration: 0
   maximumActiveTimeChangers: 2
   rewindManager: {fileID: 2148303072350252497}
   multiplier: 1

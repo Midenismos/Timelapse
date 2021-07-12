@@ -30,19 +30,20 @@ public class RewindManager : MonoBehaviour
             float lastCounter = rewindTimeCounter;
             rewindTimeCounter += deltaGameTime;
 
-            if(rewindTimeCounter >= rewindDuration)
-            {
-                deltaGameTime = rewindDuration - lastCounter;
-                rewindTimeCounter = rewindDuration;
-                timeManager.currentLoopTime -= deltaGameTime;
-                RewindRewindables(deltaGameTime);
-                EndRewind();
-            }
-            else
-            {
-                timeManager.currentLoopTime -= deltaGameTime;
-                RewindRewindables(deltaGameTime);
-            }
+            //if(rewindTimeCounter >= rewindDuration)
+            //{
+            //    deltaGameTime = rewindDuration - lastCounter;
+            //    rewindTimeCounter = rewindDuration;
+            //    timeManager.currentLoopTime -= deltaGameTime;
+            //    RewindRewindables(deltaGameTime);
+            //    EndRewind();
+            //}
+            //else
+            //{
+
+            timeManager.currentLoopTime -= deltaGameTime;
+            RewindRewindables(deltaGameTime);
+            //}
         }
         else
         {
@@ -77,19 +78,21 @@ public class RewindManager : MonoBehaviour
         }
     }
 
-    public void StartRewind(float rewindSpeed, float rewindDuration)
+    public void StartRewind(float rewindSpeed)
     {
         this.rewindSpeed = rewindSpeed;
-        this.rewindDuration = rewindDuration;
 
-        rewindTimeCounter = 0;
-
-        for (int i = 0; i < rewindables.Count; i++)
+        if(!isRewinding)
         {
-            rewindables[i].StartRewind();
-        }
+            rewindTimeCounter = 0;
 
-        isRewinding = true;
+            for (int i = 0; i < rewindables.Count; i++)
+            {
+                rewindables[i].StartRewind();
+            }
+
+            isRewinding = true;
+        }
     }
 
     public float EndRewind()

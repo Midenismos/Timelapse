@@ -192,6 +192,42 @@ public class PlayerController : MonoBehaviour
         {
             timeManager.RestartLoop();
         }
+
+
+        if (Input.GetButtonDown("StopTime"))
+        {
+            timeManager.StopTimePressed();
+        }
+
+        if (Input.GetButtonDown("SlowTime"))
+        {
+            timeManager.SlowTimePressed();
+        }
+
+        if (Input.GetButtonDown("NormalTime"))
+        {
+            timeManager.NormalTimePressed();
+        }
+
+        if (Input.GetButtonDown("SpeedTime"))
+        {
+            timeManager.SpeedTimePressed();
+        }
+
+        if (Input.GetButtonDown("RewindTimeSlow"))
+        {
+            timeManager.RewindTimeSlowPressed();
+        }
+
+        if (Input.GetButtonDown("RewindTimeNormal"))
+        {
+            timeManager.RewindTimeNormalPressed();
+        }
+
+        if (Input.GetButtonDown("RewindTimeSpeed"))
+        {
+            timeManager.RewindTimeSpeedPressed();
+        }
     }
 
     public void ReleaseHeldObject()
