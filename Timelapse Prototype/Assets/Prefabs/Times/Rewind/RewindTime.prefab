@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 8362643034727116007}
   - component: {fileID: 8384116101861917341}
   - component: {fileID: 8384116101861917340}
+  - component: {fileID: -7528233890887106512}
   m_Layer: 9
   m_Name: RewindTime
   m_TagString: Pickup
@@ -383,3 +384,16 @@ MonoBehaviour:
     duration: 30
     speed: 1
   toleranceCost: 0
+--- !u!114 &-7528233890887106512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8385329324502464433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6ef992913673347858c15d7a74a908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Foodtype: Eat

@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 12f;
     [SerializeField] private float jumpImpulsion = 5;
     [SerializeField] private float maxfallDistance = 5;
+    [SerializeField] private bool isMovingSound = false;
 
     [Header("References")]
     [SerializeField] private new Camera camera = null;
     [SerializeField] private PlayerMovement playerMovement = null;
+    [SerializeField] private MouseLook mouseLook = null;
 
     [Header("Pickup")]
     [SerializeField] private float pickupDistance = 3;
@@ -28,14 +30,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform standingCameraPosition = null;
     [SerializeField] private Transform crouchingCameraPosition = null;
 
+    [Header("UIReferences")]
+    [SerializeField] private GameObject investigationPanel = null;
 
     private TimeManager timeManager;
 
-    private GameObject pickup = null;
+    public GameObject pickup = null;
 
     private bool isCrouched = false;
 
     private IInteractable interactableInRange = null;
+
+    private bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -54,32 +60,62 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
         Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
-        playerMovement.Move(move * speed / Time.timeScale);
-
-        CheckInteractable();
-     
-        if (Input.GetButtonDown("Jump"))
+        if (isDead == false)
         {
-            playerMovement.Jump(jumpImpulsion);
+            playerMovement.Move(move * speed / Time.timeScale);
         }
 
-        if (Input.GetButtonDown("Crouch"))
+        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.01f && isMovingSound == false)
         {
-            if (isCrouched)
+            if (playerMovement.isGrounded == true)
             {
-                camera.transform.position = standingCameraPosition.position;
-                standingCollider.enabled = true;
-                crouchingCollider.enabled = false;
-                isCrouched = false;
+                FindObjectOfType<SoundManager>().Play("Walk");
             }
             else
             {
-                camera.transform.position = crouchingCameraPosition.position;
-                standingCollider.enabled = false;
-                crouchingCollider.enabled = true;
-                isCrouched = true;
+                FindObjectOfType<SoundManager>().Stop("Walk");
+            }
+            isMovingSound = true;
+        }
+        else if (gameObject.GetComponent<Rigidbody>().velocity.magnitude <= 0.01f && isMovingSound == true)
+        {
+            FindObjectOfType<SoundManager>().Stop("Walk");
+            isMovingSound = false;
+        }
+        if (playerMovement.isGrounded == false)
+        {
+            FindObjectOfType<SoundManager>().Stop("Walk");
+            isMovingSound = false;
+        }
+
+        CheckInteractable();
+
+        if (isDead == false)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                playerMovement.Jump(jumpImpulsion);
+            }
+
+            if (Input.GetButtonDown("Crouch"))
+            {
+                if (isCrouched)
+                {
+                    camera.transform.position = standingCameraPosition.position;
+                    standingCollider.enabled = true;
+                    crouchingCollider.enabled = false;
+                    isCrouched = false;
+                }
+                else
+                {
+                    camera.transform.position = crouchingCameraPosition.position;
+                    standingCollider.enabled = false;
+                    crouchingCollider.enabled = true;
+                    isCrouched = true;
+                }
             }
         }
+
 
         // Utilise l'item porté
         if (Input.GetButtonDown("Interact"))
@@ -93,6 +129,16 @@ public class PlayerController : MonoBehaviour
                 if (pickup.GetComponent<TimeChanger>() != null)
                 {
                     pickup.GetComponent<TimeChanger>().ChangeTime();
+                    if (pickup.GetComponent<FoodType>().Foodtype == "Eat")
+                    {
+                        FindObjectOfType<SoundManager>().ChangePitch("Eat");
+                        FindObjectOfType<SoundManager>().Play("Eat");
+                    }
+                    else if (pickup.GetComponent<FoodType>().Foodtype == "Drink")
+                    {
+                        FindObjectOfType<SoundManager>().ChangePitch("Drink");
+                        FindObjectOfType<SoundManager>().Play("Drink");
+                    }
                     Destroy(pickup);
                     pickup = null;
                 }
@@ -111,6 +157,8 @@ public class PlayerController : MonoBehaviour
                     if (Input.GetKeyDown("e") == true)
                     {
                         hit.collider.GetComponent<Button>().clicked = true;
+                        FindObjectOfType<SoundManager>().ChangePitch("Button");
+                        FindObjectOfType<SoundManager>().Play("Button");
                     }
                 }
 
@@ -137,12 +185,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       
+        if (Input.GetButtonDown("OpenInvestigation"))
+        {
+            OpenInvestigationPressed();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Equals))
+        {
+            timeManager.RestartLoop();
+        }
     }
 
     public void ReleaseHeldObject()
     {
         pickup = null;
+    }
+
+    private void OpenInvestigationPressed()
+    {
+        if (investigationPanel)
+        {
+            investigationPanel.SetActive(!investigationPanel.activeInHierarchy);
+            mouseLook.ChangeCursorLockMode(!investigationPanel.activeInHierarchy);
+        }
     }
 
     private void PlayerLanded(float fallenDistance)
@@ -192,9 +257,19 @@ public class PlayerController : MonoBehaviour
             interactableInRange = null;
         }
     }
+    IEnumerator Death()
+    {
+        // Empêche le joueur de bouger afin de simuler une "animation de mort" pendant la durée du son de mort et relance la loop une fois le son terminé.
+        isDead = true;
+        yield return new WaitForSeconds(FindObjectOfType<SoundManager>().FindSound("Death").length);
+        timeManager.RestartLoop();
+        yield return null;
+    }
 
     private void Die()
     {
-        timeManager.RestartLoop();
+        // Lance la couroutine de mort du joueur
+        FindObjectOfType<SoundManager>().Play("Death");
+        StartCoroutine("Death");
     }
 }

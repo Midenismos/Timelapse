@@ -44,13 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6002b8ab1f0c683408ff1b146739df2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 30
+  loopDuration: 1200
   startingMultiplier: 1
   timeLerpDuration: 1
   maximumActiveTimeChangers: 2
-  rewindManager: {fileID: 0}
+  rewindManager: {fileID: 2148303072350252497}
   multiplier: 1
-  timer: 0
+  timeChangeTimer: 0
   currentLoopTime: 0
   currentTolerance: 0
 --- !u!114 &2148303072350252497

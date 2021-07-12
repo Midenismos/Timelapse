@@ -1,10 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : Rewindable, ITimeStoppable
 {
     [SerializeField] private Animator animator = null;
+    [SerializeField] private string cardName = null;
+
+    public UnityEvent OnDoorOpened = null;
+
+    private bool isOpen = false;
+
 
     private void Start()
     {
@@ -37,5 +44,52 @@ public class Door : Rewindable, ITimeStoppable
         TimeManager timeManager = FindObjectOfType<TimeManager>();
         if (timeManager)
             timeManager.RegisterTimeStoppable(this);
+    }
+
+    // ouvre et ferme la porte
+    public void OpenDoor()
+    {
+        Debug.Log("open");
+        //animator.SetBool("character_nearby", true);
+        animator.SetTrigger("Open");
+        isOpen = true;
+        OnDoorOpened?.Invoke();
+    }
+    public void CloseDoor()
+    {
+        animator.SetBool("character_nearby", false);
+        isOpen = false;
+    }
+
+    // vérifie que le joueur possède la bonne carte d'accès
+    public void ScanCard()
+    {
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player.pickup != null)
+        {
+            if (player.pickup.name == cardName)
+            {
+                if (player.pickup.GetComponent<Card>().isBroken == false)
+                {
+                    if (isOpen == false)
+                    {
+                        OpenDoor();
+                        FindObjectOfType<SoundManager>().Play("AccessGranted");
+                    }
+                }
+                else
+                {
+                    FindObjectOfType<SoundManager>().Play("Fail");
+                }
+            }
+            else
+            {
+                FindObjectOfType<SoundManager>().Play("Fail");
+            }
+        }
+        else
+        {
+            FindObjectOfType<SoundManager>().Play("Fail");
+        }
     }
 }

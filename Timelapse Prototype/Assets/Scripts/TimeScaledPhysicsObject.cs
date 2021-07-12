@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeScaledPhysicsObject : MonoBehaviour, ITimeStoppable
 {
     private Rigidbody body = null;
+    [SerializeField] private AudioSource impactSound;
 
     private void Start()
     {
@@ -28,6 +29,18 @@ public class TimeScaledPhysicsObject : MonoBehaviour, ITimeStoppable
     {
         TimeManager timeManager = FindObjectOfType<TimeManager>();
         if (timeManager)
-            timeManager.RegisterTimeStoppable(this);
+            timeManager.UnRegisterTimeStoppable(this);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.relativeVelocity.magnitude >1)
+        {
+            if (impactSound)
+            {
+                impactSound.Play();
+            }
+        }
+    }
+
 }
