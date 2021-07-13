@@ -29,9 +29,9 @@ public class Door : Rewindable, ITimeStoppable
         animator.enabled = true;
     }
 
-    public override void StartRewind()
+    public override void StartRewind(float timestamp)
     {
-        base.StartRewind();
+        base.StartRewind(timestamp);
     }
 
     public override void EndRewind()

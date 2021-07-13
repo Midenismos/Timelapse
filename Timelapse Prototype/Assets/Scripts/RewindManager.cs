@@ -88,7 +88,7 @@ public class RewindManager : MonoBehaviour
 
             for (int i = 0; i < rewindables.Count; i++)
             {
-                rewindables[i].StartRewind();
+                rewindables[i].StartRewind(timeManager.currentLoopTime);
             }
 
             isRewinding = true;

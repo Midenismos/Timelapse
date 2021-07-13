@@ -12,7 +12,7 @@ public class Rewindable : MonoBehaviour
             rewindManager.RegisterRewindable(this);
         }
     }
-    public virtual void StartRewind()
+    public virtual void StartRewind(float timeStamp)
     {
     }
 

@@ -22,10 +22,12 @@ public class RewindablePhysicsObject : Rewindable
 
     private List<TimeStampedTransform> history = new List<TimeStampedTransform>();
 
-    public override void StartRewind()
+    public override void StartRewind(float timestamp)
     {
-        base.StartRewind();
+        base.StartRewind(timestamp);
         body.useGravity = false;
+
+        Record(timestamp);
     }
 
     public override void Rewind(float deltaGameTime, float totalTime)
@@ -33,10 +35,14 @@ public class RewindablePhysicsObject : Rewindable
         base.Rewind(deltaGameTime, totalTime);
 
         RewindHistory(totalTime);
-        float t = (1 - (totalTime - history[1].timeStamp)) / history[0].timeStamp - history[1].timeStamp;
+        if(history.Count > 1)
+        {
+            float t = (1 - (totalTime - history[1].timeStamp)) / history[0].timeStamp - history[1].timeStamp;
 
-        transform.position = Vector3.Lerp(history[0].position, history[1].position, t);
-        transform.rotation = Quaternion.Lerp(history[0].rotation, history[1].rotation, t);
+            transform.position = Vector3.Lerp(history[0].position, history[1].position, t);
+            transform.rotation = Quaternion.Lerp(history[0].rotation, history[1].rotation, t);
+        }
+        
     }
 
     public override void EndRewind()
@@ -51,11 +57,12 @@ public class RewindablePhysicsObject : Rewindable
             timeStamp,
             transform.position,
             transform.rotation));
+
     }
 
     private void RewindHistory(float timeStamp)
     {
-        while(history.Count > 2)
+        while (history.Count > 2)
         {
             if(history[0].timeStamp >= timeStamp && history[1].timeStamp < timeStamp)
             {

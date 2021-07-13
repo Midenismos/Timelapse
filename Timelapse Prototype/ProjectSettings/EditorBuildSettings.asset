@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Micro_Jeanne.unity
     guid: 50063275809bfaa4aa85a760912b2872
+  - enabled: 0
+    path: Assets/Scenes/JEANNE.unity
+    guid: 28961004d1a31434d90207e52454e47b
   m_configObjects: {}
