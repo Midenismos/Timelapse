@@ -58,6 +58,8 @@ public class Button : MonoBehaviour, IInteractable, ITimeStoppable
 
     public void Interact(GameObject pickup, PlayerController player)
     {
+        FindObjectOfType<SoundManager>().ChangePitch("Button");
+        FindObjectOfType<SoundManager>().Play("Button");
         clicked = true;
         GetComponent<MeshRenderer>().material = buttonActivatedMaterial;
 

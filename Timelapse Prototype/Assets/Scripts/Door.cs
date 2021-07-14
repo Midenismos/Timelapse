@@ -49,7 +49,6 @@ public class Door : Rewindable, ITimeStoppable
     // ouvre et ferme la porte
     public void OpenDoor()
     {
-        Debug.Log("open");
         //animator.SetBool("character_nearby", true);
         animator.SetTrigger("Open");
         isOpen = true;
@@ -65,16 +64,21 @@ public class Door : Rewindable, ITimeStoppable
     public void ScanCard()
     {
         PlayerController player = FindObjectOfType<PlayerController>();
-        if (player.pickup != null)
+        if (isOpen == false)
         {
-            if (player.pickup.name == cardName)
+            if (player.pickup != null)
             {
-                if (player.pickup.GetComponent<Card>().isBroken == false)
+                if (player.pickup.name == cardName)
                 {
-                    if (isOpen == false)
+                    if (player.pickup.GetComponent<Card>().isBroken == false)
                     {
+
                         OpenDoor();
                         FindObjectOfType<SoundManager>().Play("AccessGranted");
+                    }
+                    else
+                    {
+                        FindObjectOfType<SoundManager>().Play("Fail");
                     }
                 }
                 else
@@ -86,10 +90,6 @@ public class Door : Rewindable, ITimeStoppable
             {
                 FindObjectOfType<SoundManager>().Play("Fail");
             }
-        }
-        else
-        {
-            FindObjectOfType<SoundManager>().Play("Fail");
         }
     }
 }

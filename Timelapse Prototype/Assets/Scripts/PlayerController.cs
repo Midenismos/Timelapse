@@ -152,13 +152,11 @@ public class PlayerController : MonoBehaviour
             //Change buttons to be interactables
             if (hit.collider.tag == "Button" )
             {
-                if(timeManager.multiplier !=0)
+                if (timeManager.multiplier !=0)
                 {
                     if (Input.GetKeyDown("e") == true)
                     {
                         hit.collider.GetComponent<Button>().clicked = true;
-                        FindObjectOfType<SoundManager>().ChangePitch("Button");
-                        FindObjectOfType<SoundManager>().Play("Button");
                     }
                 }
 

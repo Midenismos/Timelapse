@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class Digicode : MonoBehaviour
 {
@@ -34,9 +36,8 @@ public class Digicode : MonoBehaviour
     private int count = 0;
     private int previousCount = 0;
 
-    public string executedFunction;
-    public string executedRewindedFunction;
-    public GameObject executedGameObject;
+    public UnityEvent executedFunction;
+    public UnityEvent executedRewindedFunction;
 
     private bool isActivated = false;
 
@@ -130,7 +131,7 @@ public class Digicode : MonoBehaviour
         if (currentNumber == maxNumber && isActivated == false)
         {
             FindObjectOfType<SoundManager>().Play("AccessGranted");
-            executedGameObject.SendMessage(executedFunction);
+            executedFunction?.Invoke();
             isActivated = true;
         }
 
@@ -151,10 +152,11 @@ public class Digicode : MonoBehaviour
     public void rewindNumber()
     {
         currentNumber -= 1;
+        executedRewindedFunction?.Invoke();
         buttons[currentNumber].GetComponent<DigicodeButton>().CheckedButton = false;
         if (currentNumber == maxNumber - 1)
         {
-            executedGameObject.SendMessage(executedRewindedFunction);
+
             isActivated = false;
         }
     }
